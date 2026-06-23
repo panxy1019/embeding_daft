@@ -1,0 +1,13 @@
+{#-
+Required:
+    tab_id (str): Table identifier.
+    n_cols (int): Number of columns in the table.
+    n_rows (int): Number of rows in the table.
+    cols (List[str]): List of column names.
+    description (Optional[str]): A brief description of the table.
+Optional:
+    None
+Dependency:
+    None
+-#}
+{{ tab_id | dumps_json }}: {% trans %}{{ n_rows }} rows, {{ n_cols }} columns.{% endtrans %} {% trans %}Schema:{% endtrans %} ({{ cols | map('dumps_json') | join(", ") }}).{% if description is defined and description %} {{ description }}{% endif %}

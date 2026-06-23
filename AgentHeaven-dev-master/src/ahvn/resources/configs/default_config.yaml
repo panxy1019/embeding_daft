@@ -1,0 +1,781 @@
+core:
+    env: dev
+    debug: false
+    lang: zh
+    encoding: utf-8
+    http_proxy: null
+    https_proxy: null
+    tmp_path: "~/.ahvn/tmp/"
+    cache_path: "~/.ahvn/cache/"
+    encrypt_keys:
+        - "api_key"
+        - "token"
+        - "password"
+        - "url"
+    config:
+        versioning:
+            keep_last_n: 20
+
+ukf:
+    version: "1.0.0"
+    text:
+        id: 63
+        short: 255
+        medium: 2047
+        long: 65535
+    db:
+        brief_enum_sample_top: 2
+        brief_enum_sample_bottom: 1
+        detail_enum_sample_top: 5
+        detail_enum_sample_bottom: 5
+        detail_col_sample_top: -1
+        detail_col_sample_bottom: 2
+
+klstore:
+    batch_size: 512
+
+klengine:
+    sync_batch_size: 512
+
+user:
+    user_id: admin
+
+prompts:
+    langs:
+        - en
+        - zh
+    main: en
+    lang: en
+    storage:
+        provider: sqlite
+        database: "file:%/prompts.db"
+    translation:
+        storage:
+            provider: sqlite
+            database: "file:%/translations.db"
+    scan:
+        - "&/prompts/"
+        - "%/prompts/"
+
+llm:
+    # Currently LiteLLM is the only LLM backend supported in ahvn
+    # LiteLLM compatible format:
+    #   <provider>/<model_identifier>
+    # When set to true, LiteLLM will be loaded in debug mode, printing information to console
+    litellm_debug: false
+    # When set to true, remove "-", "_", ".", ":", " " and lowercase from model identifiers (for matching and alias resolution only)
+    model_normalize: True
+    # Mismatched model identifiers when using ahvn LLM will be handled according to this setting. Options:
+    #   - "ignore": Use the model as specified in the preset/model configuration, even
+    #   - "match": Automatically find the closest matching model identifier, if available, otherwise error out
+    #   - "warn": Match and report a warning about model mismatch
+    #   - "raise": Raise an error and do not attempt to match
+    #   - "exit": Exit without reporting errors or warnings
+    model_mismatch: ignore
+    # For "match" and "warn", only consider it a match if the similarity ratio is above this threshold
+    model_mismatch_suggestion_thres: 0.3
+    # When set to true, the matching similarity ratio is case-sensitive, otherwise case-insensitive
+    # When model_normalize is true, this setting has no effect since identifiers are normalized to lowercase for matching
+    model_mismatch_suggestion_case: False
+    # How to display model-returned usage information.
+    usage:
+        round_elapsed: 4
+
+    default_args:
+        seed: 42
+        timeout: 120
+        http_proxy: null
+        https_proxy: null
+        # When set to true, LiteLLM will attempt to repair tool calls that fail due to malformed input or output.
+        # Specifically, the Function Call JSON will be repaired (e.g., missing escapes, incomplete JSON)
+        repair_tool_calls: true
+        # When set to true, forces non-streaming mode for tool use and structured output.
+        # This is useful for inference backends that do not support streaming with tools or response_format.
+        # When enabled and tools/response_format are present, stream=False is used internally,
+        # but the API still yields results as a generator for compatibility.
+        enforce_non_stream_structured: false
+    
+    default_preset: sys
+    presets:
+        sys:
+            desc: "Ahvn's default system preset, suitable for general-purpose use cases. Moderate intelligence with fast response time."
+            model: gemini-flash
+        local:
+            desc: "Local LLM default preset, suitable for general-purpose use cases when using local models. Moderate intelligence with fast response time."
+            provider: ollama
+            model: qwen3.5-35b
+        tiny:
+            desc: "Tiny preset for lightweight tasks and testing, using an extremely fast and efficient model. Might be less intelligent."
+            model: gemini-flash
+        tiny-local:
+            desc: "Tiny preset for lightweight tasks and testing, using an extremely fast and efficient local model. Might be less intelligent."
+            provider: ollama
+            model: qwen3.5-4b
+        chat:
+            desc: "Chat preset for conversational use cases, balancing intelligence and response time."
+            model: dsv3
+        chat-pro:
+            desc: "Stronger chat (non-thinking) preset for more complex conversations and tasks."
+            model: gpt
+        chat-local:
+            desc: "Chat preset for conversational use cases, using a local model."
+            provider: ollama
+            model: qwen3.5-35b
+            default_args:
+                extra_body:
+                    think: false
+        reason:
+            desc: "Reasoning preset for complex tasks that require reasoning. High intelligence with potentially longer response time."
+            model: dsr1
+        reason-pro:
+            desc: "Stronger reasoning preset for highly complex tasks that require deep reasoning. Extreme intelligence with potentially longer response time."
+            model: gemini-pro
+        reason-local:
+            desc: "Reasoning preset for complex tasks that require reasoning, using a local model."
+            provider: ollama
+            model: qwen3.5-35b
+            default_args:
+                extra_body:
+                    think: true
+        coder:
+            desc: "Coding preset for code generation and understanding tasks. Moderate to high intelligence."
+            model: sonnet
+        coder-pro:
+            desc: "Stronger coding preset for complex code generation and understanding tasks. Extreme intelligence."
+            model: opus
+        coder-local:
+            desc: "Coding preset for code generation and understanding tasks, using a local model."
+            provider: ollama
+            model: qwen3.5-35b
+            default_args:
+                extra_body:
+                    think: false
+        translator:
+            desc: "Translation preset for language translation tasks. Textual ability focused."
+            model: gemini-flash
+        embedder:
+            desc: "Embedding preset for general-purpose embeddings. Balanced between quality and speed."
+            provider: ollama
+            model: embeddinggemma
+        embedder-pro:
+            desc: "Embedding preset for high-quality embeddings."
+            provider: ollama
+            model: qwen3-embedding:8b
+        embedder-tiny:
+            desc: "Tiny embedding preset for lightweight embedding tasks and testing. Fast but less accurate."
+            provider: ollama
+            model: all-minilm:33m
+    models:
+        gpt-5.4:
+            aliases:
+                - gpt
+                - gpt-chat
+            default_provider: openrouter
+            identifiers:
+                openrouter: openai/gpt-5.4
+                openai: gpt-5.4
+        gemini-3.0-flash:
+            aliases:
+                - gemini-3-flash-preview
+                - gemini-flash
+            default_provider: openrouter
+            identifiers:
+                openrouter: google/gemini-3-flash-preview
+                gemini: gemini-3-flash-preview
+            default_args:
+                temperature: 1.0  # For Gemini 3 models, LiteLLM defaults temperature to 1.0 and strongly recommends keeping it at this default.
+        gemini-3.1-pro:
+            aliases:
+                - gemini-3.1-pro-preview
+                - gemini-pro
+            default_provider: openrouter
+            identifiers:
+                openrouter: google/gemini-3.1-pro-preview
+                gemini: gemini-3.1-pro-preview
+            default_args:
+                temperature: 1.0  # For Gemini 3 models, LiteLLM defaults temperature to 1.0 and strongly recommends keeping it at this default.
+        claude-opus-4.6:
+            aliases:
+                - opus
+                - opus-4.6
+                - claude
+                - claude-4.6
+                - claude-opus
+                - claude-opus-4.6
+            default_provider: openrouter
+            identifiers:
+                openrouter: anthropic/claude-opus-4.6
+                anthropic: claude-opus-4-6
+        clause-sonnet-4.6:
+            aliases:
+                - sonnet
+                - sonnet-4.6
+                - clause
+                - clause-4.6
+                - clause-sonnet
+                - clause-sonnet-4.6
+            default_provider: openrouter
+            identifiers:
+                openrouter: anthropic/clause-sonnet-4.6
+                anthropic: claude-sonnet-4-6
+        deepseek-chat:
+            aliases:
+                - ds
+                - dsv3
+                - dsv3.2
+                - v3
+                - v3.2
+                - dsv3.2-671b
+                - deepseek-v3.2
+                - deepseek-v3.2:671b
+            default_provider: openrouter
+            identifiers:
+                openrouter: deepseek/deepseek-v3.2
+                deepseek: deepseek-chat
+        deepseek-reasoner:
+            aliases:
+                - dsr1
+                - r1
+                - 3.2-thinking
+                - v3.2-thinking
+                - dsv3.2-thinking
+                - dsv3.2-thinking-671b
+                - deepseek-v3.2-thinking
+                - deepseek-v3.2-thinking:671b
+            default_provider: openrouter
+            identifiers:
+                openrouter: deepseek/deepseek-v3.2-thinking
+                deepseek: deepseek-reasoner
+        Qwen3-30B-A3B-Instruct:
+            aliases:
+                - 30a3
+                - qwen-30b
+                - qwen3-30b
+                - Qwen3-30B-A3B
+                - Qwen3-30B-A3B-Instruct
+                - Qwen3-30B-A3B-Instruct-2507
+            default_provider: ollama
+            identifiers:
+                ollama: qwen3:30b-a3b-instruct-2507-q4_K_M
+                lmstudio: qwen/qwen3-30b-a3b-2507
+                openrouter: qwen/qwen3-30b-a3b-instruct-2507
+                aliyun: qwen3-30b-a3b-instruct-2507
+        Qwen3.5-35B-A3B:
+            aliases:
+                - qwen3.5
+                - qwen3.5-35b
+                - Qwen3.5-35B-A3B
+            default_provider: ollama
+            identifiers:
+                ollama: qwen3.5:35b
+                lmstudio: qwen/qwen3.5-35b-a3b
+                openrouter: qwen/qwen3.5-35b-a3b
+                aliyun: qwen3.5-35b-a3b
+        Qwen3-4B-Instruct:
+            aliases:
+                - qwen3-4b
+                - Qwen3-4B-Instruct
+                - Qwen3-4B-Instruct-2507
+            default_provider: ollama
+            identifiers:
+                ollama: qwen3:4b
+                lmstudio: qwen/qwen3-4b-2507
+                openrouter: qwen/qwen3-4b:free
+                aliyun: qwen3-4b
+        all-MiniLM-L12-v2:
+            aliases:
+                - minilm
+                - all-minilm
+                - all-minilm:33m
+            default_provider: ollama
+            identifiers:
+                ollama: all-minilm:33m
+            _dim: 384
+            default_args:
+                batch_size: 256
+                num_threads: -1
+        EmbeddingGemma:
+            aliases:
+                - gemma
+            default_provider: ollama
+            identifiers:
+                ollama: embeddinggemma
+                lmstudio: text-embedding-embeddinggemma-300m
+            _dim: 768
+            default_args:
+                batch_size: 256
+                num_threads: -1
+        Qwen3-Embedding-8B:
+            aliases:
+                - qwen-embedding
+                - qwen3-embedding
+                - qwen-embedding-8b
+                - qwen3-embedding-8b
+            default_provider: ollama
+            identifiers:
+                ollama: qwen3-embedding:8b
+                lmstudio: text-embedding-qwen3-embedding-8b
+            _dim: 4096
+            default_args:
+                batch_size: 256
+                num_threads: -1
+    default_provider: openrouter
+    providers:
+        openrouter:
+            backend: "openrouter"
+            api_key: "<OPENROUTER_API_KEY>"
+            api_base: "https://openrouter.ai/api/v1"
+        openai:
+            backend: ""
+            api_key: "<OPENAI_API_KEY>"
+            api_base: "https://api.openai.com/v1"
+        gemini:
+            backend: "gemini"
+            api_key: "<GEMINI_API_KEY>"
+        anthropic:
+            backend: "anthropic"
+            api_key: "<ANTHROPIC_API_KEY>"
+        deepseek:
+            backend: "deepseek"
+            api_key: "<DEEPSEEK_API_KEY>"
+            api_base: "https://api.deepseek.com/beta"
+        aliyun:
+            backend: "dashscope"
+            api_key: "<DASHSCOPE_API_KEY>"
+            api_base: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+        ollama:
+            backend: "ollama"
+            api_base: "http://localhost:11434/v1"
+            http_proxy: ""
+            https_proxy: ""
+        lmstudio:
+            backend: "lm_studio"
+            api_base: "http://localhost:1234/v1"
+            http_proxy: ""
+            https_proxy: ""
+        vllm:
+            backend: "hosted_vllm" # Self-hosted VLLM uses "hosted_vllm" as the backend
+            api_base: "<VLLM_API_BASE>"
+            http_proxy: ""
+            https_proxy: ""
+
+    cache_exclude_keys:
+        - "base_url"
+        - "api_key"
+        - "api_base"
+        - "api_version"
+        - "timeout"
+        - "num_retries"
+        - "metadata"
+        - "stream_options"
+        - "logit_bias"
+        - "log_probs"
+        - "top_logprobs"
+        - "input_cost_per_token"
+        - "output_cost_per_token"
+        - "model_list"
+        - "num_threads"
+        - "batch_size"
+    retry:
+        max_attempts: 3
+        multiplier: 1
+        max: 60
+        reraise: True
+
+db:
+    # SQLAlchemy compatible format:
+    #   <dialect>+<driver>://<username>:<password>@<host>:<port>/<database>
+    default_provider: sqlite
+    display:
+        max_rows: 64
+        max_width: 64
+        style: "DEFAULT"
+    default_args:
+        http_proxy: null
+        https_proxy: null
+        sql_healing:
+            aggressiveness: balanced
+            prefer_backticks: true
+    providers:
+        sqlite:
+            dialect: sqlite
+            pragmas:
+                - "PRAGMA foreign_keys = ON;"
+                - "PRAGMA journal_mode = WAL;"
+                - "PRAGMA synchronous = NORMAL;"
+            pool:
+                pool_class: "queue"
+                connect_args:
+                    check_same_thread: false
+                pool_pre_ping: true
+                pool_size: 10
+                max_overflow: 20
+                pool_timeout: 30
+                pool_recycle: 3600
+        duckdb:
+            dialect: duckdb
+            schema: "main"
+            # This could lead to different query results, use with caution.
+            # pragmas:
+            #     - "SET preserve_insertion_order=false;"
+            pool:
+                pool_class: "queue"
+                pool_pre_ping: true
+                pool_size: 5
+                max_overflow: 10
+                pool_timeout: 30
+                pool_recycle: 3600
+        pg:
+            dialect: postgresql
+            driver: psycopg2
+            host: "localhost"
+            port: 5432
+            username: "postgres"
+            schema: "public"
+            params:
+                sslmode: "prefer"
+            pragmas:
+                - "SET timezone = 'UTC';"
+                - "SET client_encoding = 'UTF8';"
+            superuser:
+                host: "localhost"
+                port: 5432
+                username: "postgres"
+                database: "postgres"
+                schema: "public"
+                params:
+                    sslmode: "prefer"
+            pool:
+                pool_class: "queue"
+                pool_pre_ping: true
+                pool_size: 5
+                max_overflow: 10
+                pool_timeout: 30
+                pool_recycle: 3600
+        mysql:
+            dialect: mysql
+            driver: pymysql
+            host: "localhost"
+            port: 3306
+            username: "root"
+            params:
+                charset: "utf8mb4"
+            pragmas:
+                - "SET time_zone = '+00:00';"
+            superuser:
+                host: "localhost"
+                port: 3306
+                username: "root"
+                params:
+                    charset: "utf8mb4"
+            # Pool: Conservative settings to avoid "gone away" errors
+            pool:
+                pool_class: "queue"
+                pool_pre_ping: true
+                pool_size: 3
+                max_overflow: 2
+                pool_timeout: 30
+                pool_recycle: 1800
+        mssql:
+            dialect: mssql
+            driver: pymssql
+            host: "localhost"
+            port: 1433
+            username: "sa"
+            schema: "dbo"
+            pragmas:
+                - "SET ARITHABORT ON;"
+                - "SET QUOTED_IDENTIFIER ON;"
+            superuser:
+                host: "localhost"
+                port: 1433
+                username: "sa"
+                database: "master"
+                schema: "dbo"
+            pool:
+                pool_class: "queue"
+                pool_pre_ping: true
+                pool_size: 5
+                max_overflow: 10
+                pool_timeout: 30
+                pool_recycle: 3600
+        oracle:
+            # Oracle has a single global database instance per server; "database" here refers
+            # to the service name (CDB/PDB), not a user-created database. Each user has their
+            # own schema within the instance. The service_name is a required connection param.
+            dialect: oracle
+            driver: oracledb
+            host: "localhost"
+            port: 1521
+            username: "system"
+            database: "FREEPDB1"
+            schema: "{username}"
+            params:
+                service_name: "{database}"
+            pragmas:
+                - "ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD HH24:MI:SS';"
+                - "ALTER SESSION SET TIME_ZONE = 'UTC';"
+            superuser:
+                host: "localhost"
+                port: 1521
+                username: "system"
+                database: "FREEPDB1"
+                schema: "system"
+                params:
+                    service_name: "FREEPDB1"
+            pool:
+                pool_class: "queue"
+                pool_pre_ping: true
+                pool_size: 5
+                max_overflow: 10
+                pool_timeout: 30
+                pool_recycle: 3600
+        supabase:
+            dialect: postgresql
+            driver: psycopg2
+            # Supabase host is derived from the project ref (database name)
+            host: "db.{database}.supabase.co"
+            port: 5432
+            username: "postgres"
+            schema: "public"
+            params:
+                sslmode: "require"
+            pragmas:
+                - "SET timezone = 'UTC';"
+                - "SET client_encoding = 'UTF8';"
+            superuser:
+                host: "db.postgres.supabase.co"
+                port: 5432
+                username: "postgres"
+                database: "postgres"
+                schema: "public"
+                params:
+                    sslmode: "require"
+            pool:
+                pool_class: "queue"
+                pool_pre_ping: true
+                pool_size: 5
+                max_overflow: 10
+                pool_timeout: 30
+                pool_recycle: 3600
+        oceanbase:
+            dialect: mysql
+            driver: pymysql
+            host: "localhost"
+            port: 2881
+            username: "root@sys"
+            params:
+                charset: "utf8mb4"
+            pragmas:
+                - "SET time_zone = '+00:00';"
+            superuser:
+                host: "localhost"
+                port: 2881
+                username: "root@sys"
+                params:
+                    charset: "utf8mb4"
+            pool:
+                pool_class: "queue"
+                pool_pre_ping: true
+                pool_size: 3
+                max_overflow: 2
+                pool_timeout: 30
+                pool_recycle: 1800
+        starrocks:
+            dialect: starrocks
+            host: "localhost"
+            port: 9030
+            username: "root"
+            params:
+                charset: "utf8mb4"
+            pragmas:
+                - "SET time_zone = '+00:00';"
+            superuser:
+                host: "localhost"
+                port: 9030
+                username: "root"
+                params:
+                    charset: "utf8mb4"
+            pool:
+                pool_class: "queue"
+                pool_pre_ping: true
+                pool_size: 3
+                max_overflow: 2
+                pool_timeout: 30
+                pool_recycle: 1800
+        hive:
+            # Hive has a built-in "default" database that always exists; connecting without
+            # specifying a database lands in "default", making it a valid superuser target.
+            dialect: hive
+            driver: pyhive
+            host: "localhost"
+            port: 10000
+            username: "hive"
+            schema: "default"
+            params:
+                auth: "NONE"
+            superuser:
+                host: "localhost"
+                port: 10000
+                username: "hive"
+                database: "default"
+                schema: "default"
+                params:
+                    auth: "NONE"
+            pool:
+                pool_class: "queue"
+                pool_pre_ping: false
+                pool_size: 2
+                max_overflow: 1
+                pool_timeout: 60
+                pool_recycle: 3600
+        trino:
+            # Trino is a distributed SQL query engine; the "database" field maps to the catalog.
+            # Trino does not support CREATE/DROP DATABASE — catalogs are managed externally.
+            dialect: trino
+            database: "memory/default"
+            host: "localhost"
+            port: 8080
+            username: "trino"
+            schema: "default"
+            pool:
+                pool_class: "null"
+                pool_pre_ping: false
+                pool_recycle: -1
+        gauss:
+            # GaussDB (Huawei) is PostgreSQL-compatible; uses the postgresql dialect with psycopg2.
+            # Default port is 8000. Schema, pragma, and superuser semantics match PostgreSQL.
+            # Requires a one-time psycopg2 patch (applied automatically in create_database_engine).
+            dialect: postgresql
+            driver: psycopg2
+            host: "localhost"
+            port: 8000
+            username: "root"
+            schema: "public"
+            params:
+                sslmode: "prefer"
+            pragmas:
+                - "SET timezone = 'UTC';"
+                - "SET client_encoding = 'UTF8';"
+            superuser:
+                host: "localhost"
+                port: 8000
+                username: "root"
+                database: "postgres"
+                schema: "public"
+                params:
+                    sslmode: "prefer"
+            pool:
+                pool_class: "queue"
+                pool_pre_ping: true
+                pool_size: 5
+                max_overflow: 10
+                pool_timeout: 30
+                pool_recycle: 3600
+
+vdb:
+    # Supports Lance, ChromaDB, Milvus, and PGVector
+    default_provider: lancedb
+    default_embedder: embedder
+    providers:
+        simple:
+            backend: simple
+        lancedb:
+            backend: lancedb
+            uri: "./.ahvn/lancedb/"
+            collection: "default"
+            refine_factor: 10
+        chromalite:
+            backend: chroma
+            mode: "ephemeral"
+            collection: "default"
+        chroma:
+            backend: chroma
+            mode: "persistent"
+            path: "./.ahvn/chromadb/"
+            collection: "default"
+        milvuslite:
+            backend: milvus
+            uri: "./.ahvn/milvus.db"
+            collection: "default"
+        milvus:
+            backend: milvus
+            uri: "http://localhost:19530"
+            db_name: "default"
+            collection: "default"
+        pgvector:
+            backend: pgvector
+            dialect: postgresql
+            host: "localhost"
+            port: 5432
+            username: "${whoami}"
+            collection: "default"
+
+heavenbase:
+    auto_register: true
+    types:
+        identifier:
+            max_chars: 255
+        short_text:
+            max_chars: 255
+        long_text:
+            max_chars: 65535
+    backends:
+        main:
+            backend_type: sqlite
+            name: main
+            database: ":memory:"
+        vec:
+            backend_type: inmem
+            name: vec
+        # Example SQL store wired through AgentHeaven DB settings:
+        # sql:
+        #     backend_type: sqlite
+        #     name: sql
+        #     database: "%/heavenbase/heavenbase.db"
+        # search:
+        #     backend_type: elastic
+        #     name: search
+        #     hosts: ["http://localhost:9200"]
+
+mdb:
+    # MongoDB configuration (Community Edition)
+    default_embedder: embedder  # for vector search support
+    vector_index:
+        type: "vector"
+        similarity: "cosine"
+        quantization: "scalar"
+    default_args:
+        host: "localhost"
+        port: 27017
+        username: null
+        password: null
+        authSource: "admin"
+        database: "default"
+        collection: "default"
+
+tool:
+    toolkit:
+        storage:
+            provider: sqlite
+            database: "file:%/toolkits.db"
+    capsule:
+        storage:
+            provider: sqlite
+            database: "file:%/capsules.db"
+    sandbox:
+        docker:
+            image: "ghcr.io/vndee/sandbox-python-311-bullseye"
+            requirements: []
+
+agent:
+    max_stesp: 20
+
+imitator:
+    scheduler:
+        trigger: "cron"
+        minute: "0,30"
+        hours: "1-5"
+        max_instances: 1
+
+repos: {}

@@ -1,0 +1,626 @@
+# Chinese translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-01-21 10:24+0800\n"
+"PO-Revision-Date: 2025-11-12 20:38+0800\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh\n"
+"Language-Team: zh <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:1
+msgid ""
+"You are an expert database analyst. Generate a concise, practical "
+"description (1-2 sentences) for the database that helps SQL developers "
+"understand its purpose, key content, and avoid common usage mistakes."
+msgstr "你是一位数据库分析专家。请为该数据库生成一个简洁实用的描述（1-2句），以帮助SQL开发人员理解其用途、关键内容，并避免常见的使用错误。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:2
+msgid "Database Schema Information:"
+msgstr "数据库的模式信息:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:3
+msgid "Analyze the database schema information provided above"
+msgstr "分析上述数据库的模式信息"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:4
+msgid ""
+"Create a 1-2 sentence description that covers the database's main purpose"
+" and key entities"
+msgstr "创建一个1-2句的描述，描述数据库的主要目的和关键实体"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:5
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:14
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:29
+msgid ""
+"If a description is already provided, make sure all information is "
+"accurately preserved"
+msgstr "如果已经提供了描述，请确保所有信息都被准确保留"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:6
+msgid ""
+"Include important relationships or constraints that SQL developers should"
+" know"
+msgstr "包含SQL开发人员应该了解的重要关系或约束"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:7
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:16
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:31
+msgid "Mention any potential pitfalls or common query patterns"
+msgstr "提醒任何潜在的陷阱或记录常见的查询模式"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:8
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:17
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:32
+msgid ""
+"Provide only the description text without additional formatting or "
+"commentary"
+msgstr "仅提供描述文本，不要添加额外的格式或评论。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:10
+msgid ""
+"You are an expert database analyst. Generate a concise, practical "
+"description (1-2 sentences) for the table that helps SQL developers "
+"understand its purpose, key content, and avoid common usage mistakes."
+msgstr "你是一位数据库分析专家。请为该表生成一个简洁实用的描述（1-2句），以帮助SQL开发人员理解其用途、关键内容，并避免常见的使用错误。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:11
+msgid "Table Schema Information:"
+msgstr "表的模式信息:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:12
+msgid "Analyze the table schema information provided above"
+msgstr "分析上述表的模式信息"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:13
+msgid ""
+"Create a 1-2 sentence description that covers the table's purpose and key"
+" content"
+msgstr "创建一个1-2句的描述，描述表的目的和关键内容"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:15
+msgid ""
+"Include important relationships to other tables or constraints that SQL "
+"developers should know"
+msgstr "包括SQL开发人员应该了解的，与其他表的重要关系或约束"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:18
+msgid "Schema Information of the Database that the Table belongs to:"
+msgstr "该表所属的数据库的模式信息:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:20
+msgid "Enum Value:"
+msgstr "枚举值:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:21
+msgid "Schema Information of the Column that the Enum belongs to:"
+msgstr "该枚举值所属的列的模式信息:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:22
+msgid "Schema Information of the Table that the Enum belongs to:"
+msgstr "该枚举值所属的表的模式信息:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:23
+msgid "Schema Information of the Database that the Enum belongs to:"
+msgstr "该枚举值所属的数据库的模式信息:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:25
+msgid ""
+"You are an expert database analyst. Generate a concise, practical "
+"description (1-2 sentences) for the column that helps SQL developers "
+"understand its purpose, key content, and avoid common usage mistakes."
+msgstr "你是一位数据库分析专家。请为该列生成一个简洁实用的描述（1-2句），以帮助SQL开发人员理解其用途、关键内容，并避免常见的使用错误。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:26
+msgid "Column Schema Information:"
+msgstr "列的模式信息:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:27
+msgid "Analyze the column schema information provided above"
+msgstr "分析上述列的模式信息"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:28
+msgid ""
+"Create a 1-2 sentence description that covers the column's purpose and "
+"key content"
+msgstr "创建一个1-2句的描述，描述列的目的和关键内容"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:30
+msgid ""
+"Include important constraints or data patterns that SQL developers should"
+" know"
+msgstr "包括SQL开发人员应该了解的重要约束或数据模式"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:33
+msgid "Schema Information of the Table that the Column belongs to:"
+msgstr "该列所属的表的模式信息:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:34
+msgid "Schema Information of the Database that the Column belongs to:"
+msgstr "该列所属的数据库的模式信息:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:36
+msgid ""
+"You are an expert database analyst. Generate a list of practical synonyms"
+" for the table that help SQL developers recognize and refer to it "
+"accurately."
+msgstr "你是一位数据库分析专家。请为该表生成若干实用的同义词，以帮助SQL开发人员准确识别和引用该表。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:37
+msgid ""
+"The generated synonyms are used for string-based matching to identify the"
+" table in user queries"
+msgstr "生成的同义词用于基于字符串的匹配，以识别用户查询中涉及的表"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:38
+msgid ""
+"Therefore, focus on common alternative names, abbreviations, and "
+"variations that SQL developers / Users / Domain experts might use"
+msgstr "因此，重点关注SQL开发人员、用户、领域专家可能使用的常见替代名称、缩写和变体"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:39
+msgid ""
+"Generated synonyms should be concise (typically 1-3 words, as synonyms "
+"that are too long are less likely to be matched as substrings in user "
+"queries)"
+msgstr "生成的同义词应简洁（通常为1-3个单词，因为过长的同义词不太可能成为用户查询匹配到的子字符串）"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:40
+msgid ""
+"Generated synonyms will be lemmatized and lowercased before use, but DO "
+"consider different word forms like hyphens, underscores, and spaces"
+msgstr "生成的同义词将在使用前进行词形还原和小写处理，但请考虑连字符、下划线和空格等不同的单词形式"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:41
+msgid "Avoid overly generic terms that could refer to multiple tables"
+msgstr "避免使用可能指代多个表的过于通用的术语"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:43
+msgid ""
+"You are an expert database analyst. Generate a list of practical synonyms"
+" for the column that help SQL developers recognize and refer to it "
+"accurately."
+msgstr "你是一位数据库分析专家。请为该列生成若干实用的同义词，以帮助SQL开发人员准确识别和引用该列。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:44
+msgid ""
+"The generated synonyms are used for string-based matching to identify the"
+" column in user queries"
+msgstr "生成的同义词用于基于字符串的匹配，以识别用户查询中涉及的列"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:45
+msgid "Avoid overly generic terms that could refer to multiple columns"
+msgstr "避免使用可能指代多个列的过于通用的术语"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:47
+msgid ""
+"You are an expert database analyst. Generate a list of practical synonyms"
+" for the enum value that help SQL developers recognize and refer to it "
+"accurately."
+msgstr "你是一位数据库分析专家。请为该枚举值生成若干实用的同义词，以帮助SQL开发人员准确识别和引用该枚举值。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:48
+msgid ""
+"The generated synonyms are used for string-based matching to identify the"
+" enum value in user queries"
+msgstr "生成的同义词用于基于字符串的匹配，以识别用户查询中涉及的枚举值"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:49
+msgid "Avoid overly generic terms that could refer to multiple enum values"
+msgstr "避免使用可能指代多个枚举值的过于通用的术语"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:51
+msgid ""
+"You are an expert SQL engineer. Given a natural language question and "
+"access to various database tools, generate a correct sqlite SQL query to "
+"answer the question."
+msgstr "你是一位专业数据库SQL工程师。给定一个自然语言问题和对各种数据库工具的访问权限，生成一个正确的sqlite SQL查询来回答该问题。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:52
+msgid ""
+"You are an expert SQL engineer. Given a natural language question and "
+"access to various database tools, generate a correct postgresql SQL query"
+" to answer the question."
+msgstr "你是一位专业数据库SQL工程师。给定一个自然语言问题和对各种数据库工具的访问权限，生成一个正确的postgresql SQL查询来回答该问题。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:53
+msgid ""
+"You are an expert SQL engineer. Given a natural language question and "
+"access to various database tools, generate a correct mysql SQL query to "
+"answer the question."
+msgstr "你是一位专业数据库SQL工程师。给定一个自然语言问题和对各种数据库工具的访问权限，生成一个正确的mysql SQL查询来回答该问题。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:54
+msgid ""
+"You are an expert SQL engineer. Given a natural language question and "
+"access to various database tools, generate a correct duckdb SQL query to "
+"answer the question."
+msgstr "你是一位专业数据库SQL工程师。给定一个自然语言问题和对各种数据库工具的访问权限，生成一个正确的duckdb SQL查询来回答该问题。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:55
+msgid ""
+"You are an expert SQL engineer. Given a natural language question and "
+"access to various database tools, generate a correct mssql SQL query to "
+"answer the question."
+msgstr "你是一位专业数据库SQL工程师。给定一个自然语言问题和对各种数据库工具的访问权限，生成一个正确的mssql SQL查询来回答该问题。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:56
+msgid ""
+"Use the provided tools to gather necessary information about the database"
+" schema, validate or execute small SQL queries."
+msgstr "使用提供的工具来收集有关数据库模式的必要信息并验证SQL查询。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:57
+msgid ""
+"The examples, if provided, coulde be vital to generate correct SQLs. Pay "
+"close attention to how the SQL structures are formed, domain knowledge, "
+"as well as the information about tables, columns, enums used in the "
+"examples."
+msgstr "如果提供了示例，它们可能对生成正确的SQL至关重要。请务必仔细关注SQL结构的组织方式、领域知识以及示例中使用的表、列、枚举的信息。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:58
+msgid ""
+"When the question is very similar to a given example, quickly imitate the"
+" example SQL structure and utilize knowledge from the example, to reduce "
+"the total number of tool calls and respond faster."
+msgstr "当问题与某个示例非常相似时，请快速模仿该示例的SQL结构，并利用该示例中的知识，以减少使用工具的总次数并更快回复。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:59
+msgid ""
+"(Important!!!) When SQLs in the examples are sufficient to answer the "
+"question, directly adapt and modify the example SQLs to answer the "
+"question, and avoid all unnecessary tool calls."
+msgstr "（重要！！！）当示例中的SQL足以回答问题时，直接调整和修改示例SQL来回答问题，避免所有不必要的工具调用。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:60
+msgid ""
+"Balance quality and efficiency, for user experience, try to submit "
+"correct SQL as early as possible with fewer tool calls whenever possible."
+msgstr "平衡质量和效率，为了用户体验，尽可能早地提交正确的SQL，并减少工具调用次数。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:61
+msgid ""
+"`submit_sql` validates SQL queries by executing them. If the execution "
+"fails, you must continue refining your SQL until it passes validation."
+msgstr "`submit_sql`通过执行SQL查询来验证它们。如果执行失败，必须继续完善SQL，直到它通过验证。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:62
+msgid ""
+"The provided hints may help you generate accurate SQL queries. These "
+"hints are obtained from top-k relevant knowledge entries related to the "
+"user question. They are mostly reliable but may not be complete or may "
+"contain some irrelevant information. When hints disagree with examples, "
+"prioritize user inputs, then examples, then other hints. Use your best "
+"judgement to decide which parts are useful."
+msgstr "提供的提示可能有助于生成准确的SQL查询。这些提示是从与用户问题相关的前k个相关知识条目中获得的。它们大多是可靠的，但可能不完整或包含一些无关的信息。当提示与示例不一致时，优先考虑用户输入，然后是示例，然后是其他提示。仔细判断，决定哪些部分是有用的。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:63
+msgid ""
+"When certain about the final SQL query, output the SQL as response in "
+"markdown code block format '```sql ... ```'."
+msgstr "当对于最终的SQL查询比较确定时，以markdown代码块格式'```sql ... ```'输出SQL作为回复。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:64
+msgid ""
+"When the user query is an irrelevant task, politely decline to answer it "
+"and briefly introduce the database and suggested queries in natural "
+"language, then ends your response with `[END]` to force a termination."
+msgstr "当用户问题是一个无关的任务时，请礼貌地拒绝回答，并用自然语言简要介绍该数据库和建议的查询，然后以`[END]`结束回复以强制终止。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:65
+msgid ""
+"When the user query is an analysis task, do not submit a SQL. Instead, "
+"explore the database via `exec_sql`, summarize and answer the question in"
+" natural language and end your response with `[END]` to force a "
+"termination."
+msgstr "当用户问题是一个分析任务时，不要提交SQL。使用`exec_sql`探索数据库，通过自然语言总结并回答问题，并以`[END]`结束回复以强制终止。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:66
+#, fuzzy
+msgid ""
+"Before you submit SQL or terminate, always double-check the user intent "
+"to ensure your response aligns with user needs (e.g., list records vs "
+"aggregation, counts, or distincts)."
+msgstr "在提交SQL或终止之前，请始终仔细检查用户意图，以确保您的回复符合用户的需求（例如，列出记录还是聚合，计数，或去重）。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:67
+msgid ""
+"The output SQL should be commented. Always use `/* comment */` style for "
+"comments in sqlite SQL, imitate the style shown in the examples."
+msgstr "输出的SQL应包含注释。始终使用`/* comment */`样式为sqlite SQL添加注释，模仿示例中显示的样式。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:68
+msgid ""
+"The output SQL should be commented. Always use `/* comment */` style for "
+"comments in postgresql SQL, imitate the style shown in the examples."
+msgstr "输出的SQL应包含注释。始终使用`/* comment */`样式为postgresql SQL添加注释，模仿示例中显示的样式。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:69
+msgid ""
+"The output SQL should be commented. Always use `/* comment */` style for "
+"comments in mysql SQL, imitate the style shown in the examples."
+msgstr "输出的SQL应包含注释。始终使用`/* comment */`样式为mysql SQL添加注释，模仿示例中显示的样式。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:70
+msgid ""
+"The output SQL should be commented. Always use `/* comment */` style for "
+"comments in duckdb SQL, imitate the style shown in the examples."
+msgstr "输出的SQL应包含注释。始终使用`/* comment */`样式为duckdb SQL添加注释，模仿示例中显示的样式。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:71
+msgid ""
+"The output SQL should be commented. Always use `/* comment */` style for "
+"comments in mssql SQL, imitate the style shown in the examples."
+msgstr "输出的SQL应包含注释。始终使用`/* comment */`样式为mssql SQL添加注释，模仿示例中显示的样式。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:73
+msgid "The SQL you submitted resulted in an error:"
+msgstr "提交的SQL导致了一个错误："
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:74
+msgid "Please correct it and try again."
+msgstr "请更正并重试。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:75
+msgid ""
+"The task is not complete. You must output a markdown code block "
+"containing the final SQL query or an analysis using the '[END]' signal to"
+" indicate completion."
+msgstr "任务尚未完成。您必须输出一个包含最终SQL查询的markdown代码块，或输出一段分析，并使用`[END]`信号结尾来表示完成。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:77
+msgid ""
+"You are an expert Data Visualization Analyst. Your task is to analyze a "
+"user's question and the resulting SQL table data to determine the most "
+"effective visualization."
+msgstr "你是一位专业的数据可视化分析师。你的任务是分析用户的问题和生成的SQL表数据，以确定最有效的可视化方式。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:79
+msgid ""
+"Analyze the user's original question to understand their intent and what "
+"they want to see."
+msgstr "分析用户的原始问题，以了解他们的意图和想要看到的内容。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:80
+msgid ""
+"Examine the SQL result schema and sample data to understand the data "
+"structure and content."
+msgstr "检查SQL结果的模式和示例数据，以了解数据的结构和内容。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:81
+msgid ""
+"Choose the visualization type based on the user's question and data "
+"characteristics:"
+msgstr "基于用户的问题和数据特征选择可视化类型："
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:82
+msgid ""
+"- Use \"table\" for detailed data viewing, when the user asks to 'show', "
+"'list', 'display', or when uncertain."
+msgstr "- 使用“表格”进行详细数据查看，当用户要求“显示”、“列出”、“展示”时，或在不确定的情况下使用。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:83
+msgid ""
+"- Use \"bar\" for comparing categories or ranking, when the user asks "
+"about 'top', 'compare', 'rank', 'difference'."
+msgstr "- 使用“条形图”进行类别比较或排名，当用户询问“前几名”、“比较”、“排名”、“差异”时使用。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:84
+msgid ""
+"- Use \"line\" for trends over time or continuous data, when the user "
+"asks about 'trend', 'over time', 'change', 'growth'."
+msgstr "- 使用“折线图”展示随时间变化的趋势或连续数据，当用户询问“趋势”、“随时间变化”、“变化”、“增长”时使用。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:85
+msgid ""
+"- Use \"pie\" for showing proportions or percentages of a whole, when the"
+" user asks about 'percentage', 'share', 'proportion', 'breakdown'."
+msgstr "- 使用“饼图”展示整体的比例或百分比，当用户询问“百分比”、“份额”、“比例”、“细分”时使用。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:86
+#, python-brace-format
+msgid ""
+"- Use \"kpi\" for single important metrics as a bold letter value in a "
+"card, whenever the user expects a single aggregate value or a few "
+"specific values as answer (e.g., total, average, count, or some metric). "
+"Optionally, set \"format\" for formatting the KPI value `v` with units, "
+"currencies or suffices (e.g., `\"format\": \"$ {v/1000000:.2f} M\", or "
+"`\"format\": \"{v*100:.2f}%\"), or set a dictionary of "
+"`y_key_name:format_str` for multiple y_keys."
+msgstr ""
+"- "
+"使用“KPI”作为卡片中以粗体字显示的单个重要指标值，每当用户期望一个单一的聚合值或几个特定值作为答案时使用（例如，总计、平均值、计数或某些指标）。可选地，为KPI值`v`设置“format”以进行单位、货币或后缀的格式化（例如，`\"format\":"
+" \"$ {v/1000000:.2f} M\"`，或`\"format\": "
+"\"{v*100:.2f}%\"`），或者为多个y_keys设置一个`y_key_name:format_str`的字典。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:87
+msgid ""
+"- Use \"radar\" for multi-dimensional comparisons across several "
+"variables, when the user asks to 'compare' multiple attributes or "
+"dimensions, or there are clearly multiple entities with several numeric "
+"attributes each."
+msgstr "- 使用“雷达图”进行多维度比较，当用户要求“比较”多个属性或维度，或者明显存在多个实体且每个实体有多个数值属性时使用。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:88
+msgid ""
+"Always prefer \"table\" as fallback if the visualization intent is "
+"unclear or ambiguous."
+msgstr "如果可视化意图不明确或模糊，请始终优先选择“表格”作为后备选项。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:89
+msgid ""
+"In most cases, \"table\" is the safest choice when the schema is not "
+"obviously suited for other chart types."
+msgstr "在大多数情况下，当模式不明显适合其他图表类型时，“表格”是最安全的选择。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:90
+msgid ""
+"Only specify chart axes (\"x_key\", \"y_keys\", and optionally "
+"\"x_rows\") when the chosen visualization type clearly supports them. "
+"\"x_key\" contains the column name for x-axis, \"y_keys\" is a list of "
+"column names for y-axis values each for one line / type of bar / radar "
+"shape segment. \"x_rows\" is can be used to select a subset of rows "
+"(typically for KPI charts to select a single aggregation row)."
+msgstr "仅在所选的可视化类型明确支持它们时才指定图表轴（“x_key”、“y_keys”，以及可选的“x_rows”）。“x_key”包含x轴的列名，“y_keys”是一个列名列表，每个列名对应一条线/一种条形图/雷达图形段的y轴值。“x_rows”可用于选择行的子集（通常用于KPI图表以选择单个聚合行）。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:91
+msgid ""
+"Always specify a meaningful \"title\" for the visualization based on the "
+"user's question."
+msgstr "始终根据用户的问题为可视化指定一个有意义的“标题”。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:92
+msgid ""
+"When asked to summarize (`summarize: True`), provide a brief textual "
+"summary (with markdown-style emphasis) of key insights from the data as "
+"the \"summary\" field in the output."
+msgstr ""
+"当被要求总结（`summarize: "
+"True`）时，在输出的“summary”字段中提供数据的关键见解的简要文本摘要（使用markdown样式的强调）。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_ac_searched.jinja:1
+#, python-format
+msgid ""
+"Knowledge that might be related to keyword '%(search_strs)s' in query, "
+"Column: %(knowledge)s."
+msgstr "可能与查询中的关键字 '%(search_strs)s' 相关的知识，列: %(knowledge)s。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_brief.jinja:16
+msgid "nullable"
+msgstr "可为NULL"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_brief.jinja:18
+msgid "Example values:"
+msgstr "示例数据:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:19
+msgid "Column:"
+msgstr "列:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:21
+msgid "Data Type:"
+msgstr "数据类型:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:24
+msgid "Primary Key:"
+msgstr "主键:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:24
+msgid "Yes"
+msgstr "是"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:28
+msgid "Foreign Key References:"
+msgstr "外键:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:36
+msgid "Total Rows Count:"
+msgstr "总行数:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:39
+msgid "Distinct Values Count:"
+msgstr "不同枚举值数量:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:42
+msgid "NULL Values Count:"
+msgstr "NULL值数量:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:42
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/db_info.jinja:22
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/tab_info_detail.jinja:24
+msgid "None"
+msgstr "无"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:46
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/db_info.jinja:13
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/tab_info_detail.jinja:15
+msgid "Description:"
+msgstr "描述:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:49
+msgid "Enum Values:"
+msgstr "枚举值:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:60
+msgid "Stats:"
+msgstr "统计信息:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/db_ac_searched.jinja:1
+#, python-format
+msgid ""
+"Knowledge that might be related to keyword '%(search_strs)s' in query, "
+"Database: %(knowledge)s."
+msgstr "可能与查询中的关键字 '%(search_strs)s' 相关的知识，数据库: %(knowledge)s。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/db_info.jinja:11
+msgid "Database:"
+msgstr "数据库:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/db_info.jinja:15
+msgid "Tables:"
+msgstr "表:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/enum_ac_searched.jinja:1
+#, python-format
+msgid ""
+"Knowledge that might be related to keyword '%(search_strs)s' in query, "
+"Value: `%(knowledge)s`."
+msgstr "可能与查询中的关键字 '%(search_strs)s' 相关的知识，枚举值: `%(knowledge)s`。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/pred_ac_searched.jinja:1
+#, python-format
+msgid ""
+"Knowledge that might be related to keyword '%(search_strs)s' in query, "
+"Predicate: %(knowledge)s."
+msgstr "可能与查询中的关键字 '%(search_strs)s' 相关的知识，谓词表达式: %(knowledge)s。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/tab_ac_searched.jinja:1
+#, python-format
+msgid ""
+"Knowledge that might be related to keyword '%(search_strs)s' in query, "
+"Table: %(knowledge)s."
+msgstr "可能与查询中的关键字 '%(search_strs)s' 相关的知识，表: %(knowledge)s。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/tab_info_brief.jinja:13
+#, python-format
+msgid "%(n_rows)s rows, %(n_cols)s columns."
+msgstr "%(n_rows)s 行，%(n_cols)s 列。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/tab_info_brief.jinja:13
+msgid "Schema:"
+msgstr "表格模式:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/tab_info_detail.jinja:13
+msgid "Table:"
+msgstr "表:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/tab_info_detail.jinja:17
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/taxo_info_brief.jinja:13
+msgid "Columns:"
+msgstr "列:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/tab_info_detail.jinja:27
+msgid "Primary Key(s):"
+msgstr "主键:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/tab_info_detail.jinja:30
+msgid "Foreign Keys:"
+msgstr "外键:"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/taxo_ac_searched.jinja:1
+#, python-format
+msgid ""
+"Knowledge that might be related to keyword '%(search_strs)s' in query, "
+"Taxonomy: %(knowledge)s."
+msgstr "可能与查询中的关键字 '%(search_strs)s' 相关的知识，层级关系: %(knowledge)s。"
+

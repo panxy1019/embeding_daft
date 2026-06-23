@@ -1,0 +1,27 @@
+{
+    "inputs": {
+        "question": "How many superheros with both eyes red are there in the database?",
+        "sql": "SELECT COUNT(*) AS \"#superheros with red eyes\"\nFROM superhero\nWHERE eye_colour_id = 23"
+    },
+    "expected": {
+        "enums": {
+            "both eyes red": {
+                "tab_id": "superhero",
+                "col_id": "eye_colour_id",
+                "enum_val": 23
+            }
+        },
+        "columns": {
+            "eyes": {
+                "tab_id": "superhero",
+                "col_id": "eye_colour_id"
+            }
+        },
+        "tables": {
+            "superheros": {
+                "tab_id": "superhero"
+            }
+        }
+    },
+    "metadata": {}
+}

@@ -1,0 +1,32 @@
+{
+    "inputs": {
+        "question": "List all customers who live in New York or California",
+        "sql": "SELECT * FROM customers WHERE state IN ('NY', 'CA')"
+    },
+    "expected": {
+        "enums": {
+            "New York": {
+                "tab_id": "customers",
+                "col_id": "state",
+                "enum_val": "NY"
+            },
+            "California": {
+                "tab_id": "customers",
+                "col_id": "state",
+                "enum_val": "CA"
+            }
+        },
+        "columns": {
+            "customers": {
+                "tab_id": "customers",
+                "col_id": "state"
+            }
+        },
+        "tables": {
+            "customers": {
+                "tab_id": "customers"
+            }
+        }
+    },
+    "metadata": {}
+}

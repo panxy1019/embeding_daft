@@ -1,0 +1,28 @@
+{
+    "inputs": {
+        "question": "What's the total revenue?",
+        "table_data": [
+            {
+                "total_revenue": 5134889
+            }
+        ],
+        "summarize": true
+    },
+    "expected": {
+        "viz_type": "kpi",
+        "config": {
+            "title": "Total Revenue",
+            "x_key": "total_revenue",
+            "y_keys": [
+                "total_revenue"
+            ],
+            "format": "$ {v/1000000:.2f} M"
+        },
+        "summary": "The total revenue is roughly  **$5.1 million**."
+    },
+    "metadata": {
+        "notes": [
+            "Single row, single column result - perfect KPI scenario. User asks for a single aggregate value, which is best displayed as a prominent metric."
+        ]
+    }
+}

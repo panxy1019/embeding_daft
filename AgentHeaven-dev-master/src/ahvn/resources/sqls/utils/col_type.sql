@@ -1,0 +1,9 @@
+sqlite:     SELECT type AS col_type FROM pragma_table_info('{tab_name}') WHERE name = '{col_name}';
+duckdb:     SELECT data_type AS col_type FROM information_schema.columns WHERE table_name = '{tab_name}' AND column_name = '{col_name}';
+postgresql: SELECT data_type AS col_type FROM information_schema.columns WHERE table_name = '{tab_name}' AND column_name = '{col_name}';
+mysql:      SELECT DATA_TYPE AS col_type FROM information_schema.COLUMNS WHERE TABLE_NAME = '{tab_name}' AND COLUMN_NAME = '{col_name}';
+mssql:      SELECT DATA_TYPE AS col_type FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{tab_name}' AND COLUMN_NAME = '{col_name}';
+oracle:     SELECT DATA_TYPE AS col_type FROM ALL_TAB_COLUMNS WHERE TABLE_NAME = UPPER('{tab_name}') AND COLUMN_NAME = UPPER('{col_name}');
+starrocks:  SELECT DATA_TYPE AS col_type FROM information_schema.COLUMNS WHERE TABLE_NAME = '{tab_name}' AND COLUMN_NAME = '{col_name}';
+hive:       SELECT data_type AS col_type FROM information_schema.columns WHERE table_name = '{tab_name}' AND column_name = '{col_name}';
+trino:      SELECT data_type AS col_type FROM information_schema.columns WHERE table_name = '{tab_name}' AND column_name = '{col_name}';

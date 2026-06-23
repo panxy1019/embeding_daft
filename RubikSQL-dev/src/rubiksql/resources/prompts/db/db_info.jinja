@@ -1,0 +1,23 @@
+{#-
+Required:
+    db_id (str): Database identifier.
+    description (Optional[str]): A description of the database.
+    tab_infos (List[str]): List of table information strings.
+Optional:
+    None
+Dependency:
+    None
+-#}
+{% trans %}Database:{% endtrans %} {{ db_id }}
+{% if description is defined and description %}
+{% trans %}Description:{% endtrans %} {{ description }}
+{% endif %}
+{% trans %}Tables:{% endtrans %}
+
+{% if tab_infos is defined and tab_infos | length > 0 %}
+{% for tab_info in tab_infos %}
+- {{ tab_info }}
+{% endfor %}
+{% else %}
+{% trans %}None{% endtrans +%}
+{% endif %}

@@ -1,0 +1,40 @@
+{
+    "inputs": {
+        "question": "Show me all employees",
+        "table_data": [
+            {
+                "id": 1,
+                "name": "John",
+                "department": "IT",
+                "salary": 75000,
+                "hire_date": "2022-01-15"
+            },
+            {
+                "id": 2,
+                "name": "Jane",
+                "department": "HR",
+                "salary": 65000,
+                "hire_date": "2021-03-22"
+            },
+            {
+                "id": 3,
+                "name": "Bob",
+                "department": "IT",
+                "salary": 80000,
+                "hire_date": "2023-02-10"
+            }
+        ],
+        "summarize": false
+    },
+    "expected": {
+        "viz_type": "table",
+        "config": {
+            "title": "All Employees"
+        }
+    },
+    "metadata": {
+        "notes": [
+            "User asks to 'show' data - table is the default choice for data exploration. Multiple columns with mixed types (text, numbers, dates) also favor table format."
+        ]
+    }
+}

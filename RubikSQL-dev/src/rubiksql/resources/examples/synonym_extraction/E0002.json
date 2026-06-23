@@ -1,0 +1,27 @@
+{
+    "inputs": {
+        "question": "Find all employees who work in the IT department",
+        "sql": "SELECT * FROM employees WHERE department_id = 5"
+    },
+    "expected": {
+        "enums": {
+            "IT": {
+                "tab_id": "employees",
+                "col_id": "department_id",
+                "enum_val": 5
+            }
+        },
+        "columns": {
+            "department": {
+                "tab_id": "employees",
+                "col_id": "department_id"
+            }
+        },
+        "tables": {
+            "employees": {
+                "tab_id": "employees"
+            }
+        }
+    },
+    "metadata": {}
+}

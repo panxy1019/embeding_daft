@@ -1,0 +1,40 @@
+{
+    "inputs": {
+        "question": "What percentage of users are active?",
+        "table_data": [
+            {
+                "status": "active",
+                "count": 892
+            },
+            {
+                "status": "inactive",
+                "count": 108
+            },
+            {
+                "status": "total",
+                "count": 1000
+            }
+        ],
+        "summarize": true
+    },
+    "expected": {
+        "viz_type": "pie",
+        "config": {
+            "x_key": "status",
+            "y_keys": [
+                "count"
+            ],
+            "x_rows": [
+                "active",
+                "inactive"
+            ],
+            "title": "User Status Distribution"
+        },
+        "summary": "According to the data, **89.2%** of users (892 out of 1000) are active while **10.8%** are inactive (108 out of 1000)."
+    },
+    "metadata": {
+        "notes": [
+            "User explicitly asks about 'percentage' - indicates part-to-whole relationship. Small number of categories (2) with count data is ideal for pie chart. Exclude the 'total' row using x_rows to focus on the breakdown."
+        ]
+    }
+}

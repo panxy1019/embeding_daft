@@ -1,0 +1,59 @@
+core:
+    env: dev
+    debug: false
+    encoding: utf-8
+    http_proxy: null
+    https_proxy: null
+    tmp_path: '> .ahvn/tmp/'
+    cache_path: '> .ahvn/cache/'
+llm:
+    providers:
+        _OVERWRITE_: true
+        openrouter:
+            backend: openrouter
+            api_key: <OPENROUTER_API_KEY>
+            api_base: https://openrouter.ai/api/v1
+        openai:
+            backend: ''
+            api_key: <OPENAI_API_KEY>
+            api_base: https://api.openai.com/v1
+        gemini:
+            backend: gemini
+            api_key: <GEMINI_API_KEY>
+        anthropic:
+            backend: anthropic
+            api_key: <ANTHROPIC_API_KEY>
+        deepseek:
+            backend: deepseek
+            api_key: <DEEPSEEK_API_KEY>
+            api_base: https://api.deepseek.com/beta
+        ollama:
+            backend: ollama
+        lmstudio:
+            backend: lm_studio
+            api_base: http://localhost:1234/v1
+        vllm:
+            backend: hosted_vllm
+            api_base: <VLLM_API_BASE>
+    presets:
+        _OVERWRITE_: true
+        sys:
+            provider: openrouter
+            model: dsv3
+        tiny:
+            provider: ollama
+            model: qwen3-4b
+        chat:
+            provider: openrouter
+            model: dsv3
+        pro:
+            provider: openrouter
+            model: dsr1
+        embedder:
+            provider: ollama
+            model: embeddinggemma
+prompts:
+    scan:
+    - '& prompts/'
+    - '> prompts/'
+    lang: en

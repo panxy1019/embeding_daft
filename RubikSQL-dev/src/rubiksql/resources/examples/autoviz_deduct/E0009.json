@@ -1,0 +1,43 @@
+{
+    "inputs": {
+        "question": "Show me the sales trend for the last quarter",
+        "table_data": [
+            {
+                "quarter": "Q1 2023",
+                "region": "North",
+                "revenue": 150000,
+                "growth": "5.2%"
+            },
+            {
+                "quarter": "Q1 2023",
+                "region": "South",
+                "revenue": 120000,
+                "growth": "3.8%"
+            },
+            {
+                "quarter": "Q1 2023",
+                "region": "East",
+                "revenue": 180000,
+                "growth": "6.1%"
+            },
+            {
+                "quarter": "Q1 2023",
+                "region": "West",
+                "revenue": 90000,
+                "growth": "2.4%"
+            }
+        ],
+        "summarize": false
+    },
+    "expected": {
+        "viz_type": "table",
+        "config": {
+            "title": "Quarterly Sales by Region"
+        }
+    },
+    "metadata": {
+        "notes": [
+            "User wants 'trend' but data lacks proper time series (single quarter only) and contains mixed dimensions (multiple regions with percentages). Multi-dimensional data is better shown in table format."
+        ]
+    }
+}

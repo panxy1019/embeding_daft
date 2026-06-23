@@ -1,0 +1,249 @@
+core:
+    debug: false
+    lang: en
+    dbs_path: "~/.rubiksql/databases"             # Folder path for database configs (each db as a YAML file)
+    activate_db: null
+user:
+    user_id: admin
+app:
+    # GUI Application Settings
+    debug: false
+    lang: en
+    app_path: "~/.rubiksql/app"                   # Root directory for app data
+    logs_path: "~/.rubiksql/app/logs"             # Absolute path for log file storage
+    models_path: "~/.rubiksql/app/models"         # Absolute path for custom model checkpoints
+    sessions_path: "~/.rubiksql/app/sessions"     # Absolute path for session storage (supports rpj parsing)
+    page_size: 100                                # Default page size for table data viewing
+    asr:
+        # ASR (Automatic Speech Recognition) Settings
+        enabled: false                                # Enable/disable ASR feature
+        provider: "funasr"                            # ASR provider (only funasr supported currently)
+        model: "FunAudioLLM/Fun-ASR-Nano-2512"        # ASR model to use
+klbase:
+    batch_size: 256
+    build:
+        num_threads: 8
+    storages:
+        anchor:
+            provider: sqlite
+            condition:
+                tags_include:
+                    ANCHOR: true
+        main:
+            provider: sqlite
+            condition:
+                tags_exclude:
+                    ANCHOR: true
+        ac:
+            provider: sqlite
+            condition:
+                type_exclude:
+                - nl2sql-query
+                - db-enum
+                - skill
+                - tool
+    engines:
+        anchor:
+            type: facet
+            storage: anchor
+            inplace: true
+        facet:
+            type: facet
+            storage: main
+            inplace: true
+        ac:
+            type: daac
+            storage: ac
+            path_suffix: "ac/"
+            normalizer: true
+            desync: true
+        ac-enums:
+            type: daac
+            storage: main
+            path_suffix: "ac-enums/"
+            normalizer: true
+            condition:
+                type_include:
+                - db-enum
+            desync: true
+        vec-enums:
+            type: vector
+            storage: main
+            inplace: false
+            include:
+            - id
+            - content_resources
+            provider: lancedb
+            uri_suffix: "vec/"
+            encoder:
+            - "lambda kl: str(kl.enum).strip().lower()"
+            - "lambda q: str(q).strip().lower()"
+            embedder: "embedder"
+            condition:
+                type_include:
+                - db-enum
+        vec-queries-by-name:
+            type: vector
+            storage: main
+            inplace: false
+            include:
+            - id
+            provider: lancedb
+            uri_suffix: "vec/"
+            encoder:
+            - "lambda kl: str(kl.name).strip().lower()"
+            - "lambda q: str(q).strip().lower()"
+            embedder: "embedder"
+            condition:
+                type_include:
+                - nl2sql-query
+        vec-queries-by-mask:
+            type: vector
+            storage: main
+            inplace: false
+            include:
+            - id
+            provider: lancedb
+            uri_suffix: "vec/"
+            encoder:
+            - "lambda kl: str(kl.get('masked', '')).strip().lower()"
+            - "lambda q: str(q).strip().lower()"  # TODO: use masked query
+            embedder: "embedder"
+            condition:
+                type_include:
+                - nl2sql-query
+        skills:
+            type: vector
+            storage: main
+            inplace: false
+            include:
+            - id
+            provider: lancedb
+            uri_suffix: skills/
+            encoder:
+            - 'lambda kl: "<name>"+str(getattr(kl, "name", "")).strip().lower()+"</name>\n<description>"+str(getattr(kl,
+                "description", "")).strip().lower()+"</description>"'
+            - 'lambda q: str(q).strip().lower()'
+            embedder: embedder
+            condition:
+                type_include:
+                - skill
+    retrieval:
+        mode: default
+        related_search: 
+            enabled: false
+            max-depth: 3
+        type_strategies:
+            db-database:
+                engines:
+                - name: ac
+                  params:
+                    whole_word: true
+                related-search-trigger: 
+                - has_table
+            db-table:
+                engines:
+                - name: ac
+                  params:
+                    whole_word: true
+                related-search-trigger:
+                - in_database
+            db-column:
+                engines:
+                - name: ac
+                  params:
+                    whole_word: true
+                related-search-trigger:
+                - in_table
+            db-enum:
+                engines:
+                - name:  ac-enums
+                  params:
+                    whole_word: true
+                - name: vec-enums
+                  params:
+                    topk: 10
+                related-search-trigger:
+                - in_column
+            db-taxonomy:
+                engines:
+                - name: ac
+                  params:
+                    whole_word: true
+                related-search-trigger:
+                - has_column
+            nl2sql-query:
+                engines:
+                - name: vec-queries-by-name
+                  params:
+                    topk: 10
+                - name: vec-queries-by-mask
+                  params:
+                    topk: 10
+            knowledge:
+                engines:
+                - name: ac
+                  params:
+                    whole_word: true
+                related-search-trigger:
+                - mentioned
+ukfts:
+    col_ukft:
+        enum_sample_top: 20
+        enum_sample_bottom: 20
+        enum_dists_interval: 20
+        enum_value_cutoff: 128
+        type_deduction:
+            categorical_max_cnt: 64
+            categorical_max_ratio: 0.5
+            longtext_min_max_len: 256
+            identifier_min_ratio: 0.99
+        brief:
+            enum_sample_top: 2
+            enum_sample_bottom: 1
+        detail:
+            enum_sample_top: 5
+            enum_sample_bottom: 3
+        parse_datetime_format:
+            enum_sample_top: 3
+            enum_sample_bottom: 3
+    tab_ukft:
+        detail:
+            col_sample_top: 32
+            col_sample_bottom: 32
+tools:
+    exec_sql:
+        max_rows: 32
+        max_width: 64
+        style: DEFAULT
+    tab_info:
+        tab_suggest_thres: 0.3
+        tab_suggest_candid: 3
+    col_info:
+        col_suggest_thres: 0.3
+        col_suggest_candid: 3
+        tab_suggest_thres: 0.3
+        tab_suggest_candid: 3
+    fuzzy_enum:
+        topk: 10
+        fetchk: 100
+        thres: 0.3
+agents:
+    default_agent: auto
+    flash:
+        llm_args:
+            preset: tiny
+        max_steps: 5
+    auto:
+        llm_args:
+            preset: chat
+        max_steps: 10
+    heavy:
+        llm_args:
+            preset: pro
+        max_steps: 20
+    beta:
+        debug_only: true
+        llm_args:
+            preset: chat
+        max_steps: 10

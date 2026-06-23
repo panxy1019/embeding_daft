@@ -1,0 +1,9 @@
+sqlite:     SELECT MIN(LENGTH("{col_name}")) AS min_len, MAX(LENGTH("{col_name}")) AS max_len, AVG(LENGTH("{col_name}")) AS avg_len FROM "{tab_name}";
+duckdb:     SELECT MIN(LENGTH("{col_name}")) AS min_len, MAX(LENGTH("{col_name}")) AS max_len, AVG(LENGTH("{col_name}")) AS avg_len FROM "{tab_name}";
+postgresql: SELECT MIN(LENGTH("{col_name}")) AS min_len, MAX(LENGTH("{col_name}")) AS max_len, AVG(LENGTH("{col_name}")) AS avg_len FROM "{tab_name}";
+mysql:      SELECT MIN(LENGTH(`{col_name}`)) AS min_len, MAX(LENGTH(`{col_name}`)) AS max_len, AVG(LENGTH(`{col_name}`)) AS avg_len FROM `{tab_name}`;
+mssql:      SELECT MIN(LEN([{col_name}])) AS min_len, MAX(LEN([{col_name}])) AS max_len, AVG(LEN([{col_name}])) AS avg_len FROM [{tab_name}];
+oracle:     SELECT MIN(LENGTH("{col_name}")) AS min_len, MAX(LENGTH("{col_name}")) AS max_len, AVG(LENGTH("{col_name}")) AS avg_len FROM "{tab_name}";
+starrocks:  SELECT MIN(LENGTH(`{col_name}`)) AS min_len, MAX(LENGTH(`{col_name}`)) AS max_len, AVG(LENGTH(`{col_name}`)) AS avg_len FROM `{tab_name}`;
+hive:       SELECT MIN(LENGTH(`{col_name}`)) AS min_len, MAX(LENGTH(`{col_name}`)) AS max_len, AVG(LENGTH(`{col_name}`)) AS avg_len FROM `{tab_name}`;
+trino:      SELECT MIN(LENGTH("{col_name}")) AS min_len, MAX(LENGTH("{col_name}")) AS max_len, AVG(LENGTH("{col_name}")) AS avg_len FROM "{tab_name}";

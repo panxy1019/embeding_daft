@@ -1,0 +1,9 @@
+sqlite:     SELECT DISTINCT "{col_name}" AS col_enums FROM "{tab_name}";
+duckdb:     SELECT DISTINCT "{col_name}" AS col_enums FROM "{tab_name}";
+postgresql: SELECT DISTINCT "{col_name}" AS col_enums FROM "{tab_name}";
+mysql:      SELECT DISTINCT `{col_name}` AS col_enums FROM `{tab_name}`;
+mssql:      SELECT DISTINCT [{col_name}] AS col_enums FROM [{tab_name}];
+oracle:     SELECT DISTINCT "{col_name}" AS col_enums FROM "{tab_name}";
+starrocks:  SELECT DISTINCT `{col_name}` AS col_enums FROM `{tab_name}`;
+hive:       SELECT DISTINCT `{col_name}` AS col_enums FROM `{tab_name}`;
+trino:      SELECT DISTINCT "{col_name}" AS col_enums FROM "{tab_name}";

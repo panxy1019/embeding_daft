@@ -1,0 +1,618 @@
+# Translations template for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-01-21 10:24+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:1
+msgid ""
+"You are an expert database analyst. Generate a concise, practical "
+"description (1-2 sentences) for the database that helps SQL developers "
+"understand its purpose, key content, and avoid common usage mistakes."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:2
+msgid "Database Schema Information:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:3
+msgid "Analyze the database schema information provided above"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:4
+msgid ""
+"Create a 1-2 sentence description that covers the database's main purpose"
+" and key entities"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:5
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:14
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:29
+msgid ""
+"If a description is already provided, make sure all information is "
+"accurately preserved"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:6
+msgid ""
+"Include important relationships or constraints that SQL developers should"
+" know"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:7
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:16
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:31
+msgid "Mention any potential pitfalls or common query patterns"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:8
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:17
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:32
+msgid ""
+"Provide only the description text without additional formatting or "
+"commentary"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:10
+msgid ""
+"You are an expert database analyst. Generate a concise, practical "
+"description (1-2 sentences) for the table that helps SQL developers "
+"understand its purpose, key content, and avoid common usage mistakes."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:11
+msgid "Table Schema Information:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:12
+msgid "Analyze the table schema information provided above"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:13
+msgid ""
+"Create a 1-2 sentence description that covers the table's purpose and key"
+" content"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:15
+msgid ""
+"Include important relationships to other tables or constraints that SQL "
+"developers should know"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:18
+msgid "Schema Information of the Database that the Table belongs to:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:20
+msgid "Enum Value:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:21
+msgid "Schema Information of the Column that the Enum belongs to:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:22
+msgid "Schema Information of the Table that the Enum belongs to:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:23
+msgid "Schema Information of the Database that the Enum belongs to:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:25
+msgid ""
+"You are an expert database analyst. Generate a concise, practical "
+"description (1-2 sentences) for the column that helps SQL developers "
+"understand its purpose, key content, and avoid common usage mistakes."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:26
+msgid "Column Schema Information:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:27
+msgid "Analyze the column schema information provided above"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:28
+msgid ""
+"Create a 1-2 sentence description that covers the column's purpose and "
+"key content"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:30
+msgid ""
+"Include important constraints or data patterns that SQL developers should"
+" know"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:33
+msgid "Schema Information of the Table that the Column belongs to:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:34
+msgid "Schema Information of the Database that the Column belongs to:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:36
+msgid ""
+"You are an expert database analyst. Generate a list of practical synonyms"
+" for the table that help SQL developers recognize and refer to it "
+"accurately."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:37
+msgid ""
+"The generated synonyms are used for string-based matching to identify the"
+" table in user queries"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:38
+msgid ""
+"Therefore, focus on common alternative names, abbreviations, and "
+"variations that SQL developers / Users / Domain experts might use"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:39
+msgid ""
+"Generated synonyms should be concise (typically 1-3 words, as synonyms "
+"that are too long are less likely to be matched as substrings in user "
+"queries)"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:40
+msgid ""
+"Generated synonyms will be lemmatized and lowercased before use, but DO "
+"consider different word forms like hyphens, underscores, and spaces"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:41
+msgid "Avoid overly generic terms that could refer to multiple tables"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:43
+msgid ""
+"You are an expert database analyst. Generate a list of practical synonyms"
+" for the column that help SQL developers recognize and refer to it "
+"accurately."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:44
+msgid ""
+"The generated synonyms are used for string-based matching to identify the"
+" column in user queries"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:45
+msgid "Avoid overly generic terms that could refer to multiple columns"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:47
+msgid ""
+"You are an expert database analyst. Generate a list of practical synonyms"
+" for the enum value that help SQL developers recognize and refer to it "
+"accurately."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:48
+msgid ""
+"The generated synonyms are used for string-based matching to identify the"
+" enum value in user queries"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:49
+msgid "Avoid overly generic terms that could refer to multiple enum values"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:51
+msgid ""
+"You are an expert SQL engineer. Given a natural language question and "
+"access to various database tools, generate a correct sqlite SQL query to "
+"answer the question."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:52
+msgid ""
+"You are an expert SQL engineer. Given a natural language question and "
+"access to various database tools, generate a correct postgresql SQL query"
+" to answer the question."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:53
+msgid ""
+"You are an expert SQL engineer. Given a natural language question and "
+"access to various database tools, generate a correct mysql SQL query to "
+"answer the question."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:54
+msgid ""
+"You are an expert SQL engineer. Given a natural language question and "
+"access to various database tools, generate a correct duckdb SQL query to "
+"answer the question."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:55
+msgid ""
+"You are an expert SQL engineer. Given a natural language question and "
+"access to various database tools, generate a correct mssql SQL query to "
+"answer the question."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:56
+msgid ""
+"Use the provided tools to gather necessary information about the database"
+" schema, validate or execute small SQL queries."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:57
+msgid ""
+"The examples, if provided, coulde be vital to generate correct SQLs. Pay "
+"close attention to how the SQL structures are formed, domain knowledge, "
+"as well as the information about tables, columns, enums used in the "
+"examples."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:58
+msgid ""
+"When the question is very similar to a given example, quickly imitate the"
+" example SQL structure and utilize knowledge from the example, to reduce "
+"the total number of tool calls and respond faster."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:59
+msgid ""
+"(Important!!!) When SQLs in the examples are sufficient to answer the "
+"question, directly adapt and modify the example SQLs to answer the "
+"question, and avoid all unnecessary tool calls."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:60
+msgid ""
+"Balance quality and efficiency, for user experience, try to submit "
+"correct SQL as early as possible with fewer tool calls whenever possible."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:61
+msgid ""
+"`submit_sql` validates SQL queries by executing them. If the execution "
+"fails, you must continue refining your SQL until it passes validation."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:62
+msgid ""
+"The provided hints may help you generate accurate SQL queries. These "
+"hints are obtained from top-k relevant knowledge entries related to the "
+"user question. They are mostly reliable but may not be complete or may "
+"contain some irrelevant information. When hints disagree with examples, "
+"prioritize user inputs, then examples, then other hints. Use your best "
+"judgement to decide which parts are useful."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:63
+msgid ""
+"When certain about the final SQL query, output the SQL as response in "
+"markdown code block format '```sql ... ```'."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:64
+msgid ""
+"When the user query is an irrelevant task, politely decline to answer it "
+"and briefly introduce the database and suggested queries in natural "
+"language, then ends your response with `[END]` to force a termination."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:65
+msgid ""
+"When the user query is an analysis task, do not submit a SQL. Instead, "
+"explore the database via `exec_sql`, summarize and answer the question in"
+" natural language and end your response with `[END]` to force a "
+"termination."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:66
+msgid ""
+"Before you submit SQL or terminate, always double-check the user intent "
+"to ensure your response aligns with user needs (e.g., list records vs "
+"aggregation, counts, or distincts)."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:67
+msgid ""
+"The output SQL should be commented. Always use `/* comment */` style for "
+"comments in sqlite SQL, imitate the style shown in the examples."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:68
+msgid ""
+"The output SQL should be commented. Always use `/* comment */` style for "
+"comments in postgresql SQL, imitate the style shown in the examples."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:69
+msgid ""
+"The output SQL should be commented. Always use `/* comment */` style for "
+"comments in mysql SQL, imitate the style shown in the examples."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:70
+msgid ""
+"The output SQL should be commented. Always use `/* comment */` style for "
+"comments in duckdb SQL, imitate the style shown in the examples."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:71
+msgid ""
+"The output SQL should be commented. Always use `/* comment */` style for "
+"comments in mssql SQL, imitate the style shown in the examples."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:73
+msgid "The SQL you submitted resulted in an error:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:74
+msgid "Please correct it and try again."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:75
+msgid ""
+"The task is not complete. You must output a markdown code block "
+"containing the final SQL query or an analysis using the '[END]' signal to"
+" indicate completion."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:77
+msgid ""
+"You are an expert Data Visualization Analyst. Your task is to analyze a "
+"user's question and the resulting SQL table data to determine the most "
+"effective visualization."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:79
+msgid ""
+"Analyze the user's original question to understand their intent and what "
+"they want to see."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:80
+msgid ""
+"Examine the SQL result schema and sample data to understand the data "
+"structure and content."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:81
+msgid ""
+"Choose the visualization type based on the user's question and data "
+"characteristics:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:82
+msgid ""
+"- Use \"table\" for detailed data viewing, when the user asks to 'show', "
+"'list', 'display', or when uncertain."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:83
+msgid ""
+"- Use \"bar\" for comparing categories or ranking, when the user asks "
+"about 'top', 'compare', 'rank', 'difference'."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:84
+msgid ""
+"- Use \"line\" for trends over time or continuous data, when the user "
+"asks about 'trend', 'over time', 'change', 'growth'."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:85
+msgid ""
+"- Use \"pie\" for showing proportions or percentages of a whole, when the"
+" user asks about 'percentage', 'share', 'proportion', 'breakdown'."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:86
+#, python-brace-format
+msgid ""
+"- Use \"kpi\" for single important metrics as a bold letter value in a "
+"card, whenever the user expects a single aggregate value or a few "
+"specific values as answer (e.g., total, average, count, or some metric). "
+"Optionally, set \"format\" for formatting the KPI value `v` with units, "
+"currencies or suffices (e.g., `\"format\": \"$ {v/1000000:.2f} M\", or "
+"`\"format\": \"{v*100:.2f}%\"), or set a dictionary of "
+"`y_key_name:format_str` for multiple y_keys."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:87
+msgid ""
+"- Use \"radar\" for multi-dimensional comparisons across several "
+"variables, when the user asks to 'compare' multiple attributes or "
+"dimensions, or there are clearly multiple entities with several numeric "
+"attributes each."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:88
+msgid ""
+"Always prefer \"table\" as fallback if the visualization intent is "
+"unclear or ambiguous."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:89
+msgid ""
+"In most cases, \"table\" is the safest choice when the schema is not "
+"obviously suited for other chart types."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:90
+msgid ""
+"Only specify chart axes (\"x_key\", \"y_keys\", and optionally "
+"\"x_rows\") when the chosen visualization type clearly supports them. "
+"\"x_key\" contains the column name for x-axis, \"y_keys\" is a list of "
+"column names for y-axis values each for one line / type of bar / radar "
+"shape segment. \"x_rows\" is can be used to select a subset of rows "
+"(typically for KPI charts to select a single aggregation row)."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:91
+msgid ""
+"Always specify a meaningful \"title\" for the visualization based on the "
+"user's question."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/_locales.jinja:92
+msgid ""
+"When asked to summarize (`summarize: True`), provide a brief textual "
+"summary (with markdown-style emphasis) of key insights from the data as "
+"the \"summary\" field in the output."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_ac_searched.jinja:1
+#, python-format
+msgid ""
+"Knowledge that might be related to keyword '%(search_strs)s' in query, "
+"Column: %(knowledge)s."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_brief.jinja:16
+msgid "nullable"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_brief.jinja:18
+msgid "Example values:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:19
+msgid "Column:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:21
+msgid "Data Type:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:24
+msgid "Primary Key:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:24
+msgid "Yes"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:28
+msgid "Foreign Key References:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:36
+msgid "Total Rows Count:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:39
+msgid "Distinct Values Count:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:42
+msgid "NULL Values Count:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:42
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/db_info.jinja:22
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/tab_info_detail.jinja:24
+msgid "None"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:46
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/db_info.jinja:13
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/tab_info_detail.jinja:15
+msgid "Description:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:49
+msgid "Enum Values:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/col_info_detail.jinja:60
+msgid "Stats:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/db_ac_searched.jinja:1
+#, python-format
+msgid ""
+"Knowledge that might be related to keyword '%(search_strs)s' in query, "
+"Database: %(knowledge)s."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/db_info.jinja:11
+msgid "Database:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/db_info.jinja:15
+msgid "Tables:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/enum_ac_searched.jinja:1
+#, python-format
+msgid ""
+"Knowledge that might be related to keyword '%(search_strs)s' in query, "
+"Value: `%(knowledge)s`."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/pred_ac_searched.jinja:1
+#, python-format
+msgid ""
+"Knowledge that might be related to keyword '%(search_strs)s' in query, "
+"Predicate: %(knowledge)s."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/tab_ac_searched.jinja:1
+#, python-format
+msgid ""
+"Knowledge that might be related to keyword '%(search_strs)s' in query, "
+"Table: %(knowledge)s."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/tab_info_brief.jinja:13
+#, python-format
+msgid "%(n_rows)s rows, %(n_cols)s columns."
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/tab_info_brief.jinja:13
+msgid "Schema:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/tab_info_detail.jinja:13
+msgid "Table:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/tab_info_detail.jinja:17
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/taxo_info_brief.jinja:13
+msgid "Columns:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/tab_info_detail.jinja:27
+msgid "Primary Key(s):"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/tab_info_detail.jinja:30
+msgid "Foreign Keys:"
+msgstr ""
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/db/taxo_ac_searched.jinja:1
+#, python-format
+msgid ""
+"Knowledge that might be related to keyword '%(search_strs)s' in query, "
+"Taxonomy: %(knowledge)s."
+msgstr ""
+

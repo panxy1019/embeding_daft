@@ -1,0 +1,26 @@
+{
+    "inputs": {
+        "question": "What is the total profit for Q1 2024?",
+        "sql": "SELECT SUM(CASE WHEN report_item LIKE '%revenue%' THEN amount WHEN report_item LIKE '%expense%' THEN -amount ELSE 0 END) AS profit FROM financial_reports WHERE period IN ('202401', '202402', '202403')"
+    },
+    "expected": {
+        "predicates": {
+            "Q1 2024": {
+                "tab_id": "financial_reports",
+                "predicate": {
+                    "FIELD:period": {
+                        "IN": [
+                            "202401",
+                            "202402",
+                            "202403"
+                        ]
+                    }
+                }
+            }
+        },
+        "knowledge": {
+            "profit": "Profit is calculated as Total Revenue minus Total Expenses. In the financial_reports, use `report_item` to identify revenue and expense entries. Example: `CASE WHEN report_item LIKE '%revenue%' THEN <amount> WHEN report_item LIKE '%expense%' THEN -<amount> ELSE 0 END`."
+        }
+    },
+    "metadata": {}
+}

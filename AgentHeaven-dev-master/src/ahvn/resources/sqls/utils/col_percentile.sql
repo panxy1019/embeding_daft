@@ -1,0 +1,9 @@
+sqlite:     SELECT "{col_name}" AS p FROM "{tab_name}" WHERE "{col_name}" IS NOT NULL ORDER BY "{col_name}" LIMIT 1 OFFSET (SELECT CAST(({p}/100.0)*(COUNT(*)-1) AS INT) FROM "{tab_name}" WHERE "{col_name}" IS NOT NULL);
+duckdb:     SELECT CASE WHEN {p}=0 THEN min("{col_name}") WHEN {p}=100 THEN max("{col_name}") ELSE quantile_cont("{col_name}",{p}/100.0) END AS p FROM "{tab_name}";
+postgresql: SELECT CASE WHEN {p}=0 THEN min("{col_name}") WHEN {p}=100 THEN max("{col_name}") ELSE percentile_cont({p}/100.0) WITHIN GROUP (ORDER BY "{col_name}") END AS p FROM "{tab_name}";
+mysql:      SELECT `{col_name}` AS p FROM (SELECT `{col_name}`, ROW_NUMBER() OVER (ORDER BY `{col_name}`) - 1 AS rn, COUNT(*) OVER () - 1 AS max_rn FROM `{tab_name}` WHERE `{col_name}` IS NOT NULL) t WHERE rn = ROUND({p}/100.0 * max_rn) LIMIT 1;
+mssql:      SELECT DISTINCT CASE WHEN {p}=0 THEN MIN([{col_name}]) OVER () WHEN {p}=100 THEN MAX([{col_name}]) OVER () ELSE PERCENTILE_CONT({p}/100.0) WITHIN GROUP (ORDER BY [{col_name}]) OVER () END AS p FROM [{tab_name}];
+oracle:     SELECT CASE WHEN {p}=0 THEN min("{col_name}") WHEN {p}=100 THEN max("{col_name}") ELSE percentile_cont({p}/100.0) WITHIN GROUP (ORDER BY "{col_name}") END AS p FROM "{tab_name}";
+starrocks:  SELECT CASE WHEN {p}=0 THEN min(`{col_name}`) WHEN {p}=100 THEN max(`{col_name}`) ELSE PERCENTILE_APPROX(`{col_name}`,{p}/100.0) END AS p FROM `{tab_name}`;
+hive:       SELECT CASE WHEN {p}=0 THEN min(`{col_name}`) WHEN {p}=100 THEN max(`{col_name}`) ELSE PERCENTILE_APPROX(`{col_name}`,{p}/100.0) END AS p FROM `{tab_name}`;
+trino:      SELECT CASE WHEN {p}=0 THEN min("{col_name}") WHEN {p}=100 THEN max("{col_name}") ELSE approx_percentile("{col_name}",{p}/100.0) END AS p FROM "{tab_name}";

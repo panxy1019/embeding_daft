@@ -1,0 +1,48 @@
+[project]
+name = "rubiksql"
+dynamic = ["version", "dependencies", "optional-dependencies"]
+authors = [
+    { name="RubikSQL Team", email="chenzui1@huawei.com" },
+]
+description = "RubikSQL: Bridging the NL2SQL Research-to-Production Gap via Lifelong Learning Agentic Knowledge Base"
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.10,<3.14"
+keywords = ["agent", "ai", "nl2sql", "rubik", "rubiksql"]
+license = { file = "LICENSE" }
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent"
+]
+
+[project.urls]
+Homepage = "https://github.com/orgs/RubikSQL"
+Documentation = "https://rubiksql.github.io/AgentHeaven-docs/en/example-applications/nl2sql-system.html"
+Repository = "https://github.com/RubikSQL/RubikSQL"
+"Bug Tracker" = "https://github.com/RubikSQL/RubikSQL/issues"
+
+[project.scripts]
+rubiksql = "rubiksql.cli:main"
+
+[build-system]
+requires = [ "setuptools>=62.6", "wheel" ]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.dynamic]
+version = {attr = "rubiksql.version.__version__"}
+dependencies = { file = ["requirements.txt"] }
+optional-dependencies.dev = { file = ["requirements-dev.txt"] }
+
+[tool.black]
+line-length = 160
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+filterwarnings = [
+    "ignore:.*:DeprecationWarning:litellm.*"
+]

@@ -1,0 +1,9 @@
+sqlite:     SELECT {agg}({distinct}"{col_name}") as agg FROM "{tab_name}";
+duckdb:     SELECT {agg}({distinct}"{col_name}") as agg FROM "{tab_name}";
+postgresql: SELECT {agg}({distinct}"{col_name}") as agg FROM "{tab_name}";
+mysql:      SELECT {agg}({distinct}`{col_name}`) as agg FROM `{tab_name}`;
+mssql:      SELECT {agg}({distinct}[{col_name}]) as agg FROM [{tab_name}];
+oracle:     SELECT {agg}({distinct}"{col_name}") as agg FROM "{tab_name}";
+starrocks:  SELECT {agg}({distinct}`{col_name}`) as agg FROM `{tab_name}`;
+hive:       SELECT {agg}({distinct}`{col_name}`) as agg FROM `{tab_name}`;
+trino:      SELECT {agg}({distinct}"{col_name}") as agg FROM "{tab_name}";

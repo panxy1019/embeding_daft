@@ -1,0 +1,35 @@
+{#-
+Required:
+    tab_id (str): Table identifier.
+    description (Optional[str]): A brief description of the table.
+    col_infos (List[str]): List of column information strings.
+    pks (List[str]): List of primary key column names.
+    fks (List[str]): List of foreign key column names.
+Optional:
+    None
+Dependency:
+    None
+-#}
+{% trans %}Table:{% endtrans %} {{ tab_id }}
+{% if description is defined and description %}
+{% trans %}Description:{% endtrans %} {{ description }}
+{% endif %}
+{% trans %}Columns:{% endtrans %}
+
+{% if col_infos is defined and col_infos | length > 0 %}
+{% for col_info in col_infos %}
+- {{ col_info }}
+{% endfor %}
+{% else %}
+{% trans %}None{% endtrans +%}
+{% endif %}
+{% if pks is defined and pks | length > 0 %}
+{% trans %}Primary Key(s):{% endtrans %} ({{ pks | map('dumps_json') | join(", ") }})
+{% endif %}
+{% if fks is defined and fks | length > 0 %}
+{% trans %}Foreign Keys:{% endtrans %}
+
+{% for fk in fks %}
+- {{ fk.col_name | dumps_json }} -> {{ fk.tab_ref | dumps_json }}.{{ fk.col_ref | dumps_json }}
+{% endfor %}
+{% endif %}

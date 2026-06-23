@@ -1,0 +1,40 @@
+{
+    "inputs": {
+        "question": "How have monthly sales changed over time?",
+        "table_data": [
+            {
+                "month": "2023-01",
+                "sales": 100000
+            },
+            {
+                "month": "2023-02",
+                "sales": 120000
+            },
+            {
+                "month": "2023-03",
+                "sales": 110000
+            },
+            {
+                "month": "2023-04",
+                "sales": 135000
+            }
+        ],
+        "summarize": true
+    },
+    "expected": {
+        "viz_type": "line",
+        "config": {
+            "x_key": "month",
+            "y_keys": [
+                "sales"
+            ],
+            "title": "Monthly Sales Trend"
+        },
+        "summary": "The sales have shown an overall **upward trend** from January to April 2023, starting at **100,000** in January and reaching **135,000** in April, with a slight dip in March."
+    },
+    "metadata": {
+        "notes": [
+            "User asks about 'changed over time' - indicates trend analysis. Date/time x-axis with numerical y-axis is ideal for line chart visualization."
+        ]
+    }
+}

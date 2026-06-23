@@ -1,0 +1,48 @@
+{
+    "inputs": {
+        "question": "Compare the performance, price, screen, and battery life of phone model X, X2, and XPro. What should I choose when I want extreme battery life?",
+        "table_data": [
+            {
+                "model": "X",
+                "performance_score": 85,
+                "price_score": 70,
+                "screen_score": 80,
+                "battery_score": 75
+            },
+            {
+                "model": "X2",
+                "performance_score": 90,
+                "price_score": 65,
+                "screen_score": 85,
+                "battery_score": 80
+            },
+            {
+                "model": "XPro",
+                "performance_score": 95,
+                "price_score": 45,
+                "screen_score": 90,
+                "battery_score": 95
+            }
+        ],
+        "summarize": true
+    },
+    "expected": {
+        "viz_type": "radar",
+        "config": {
+            "x_key": "model",
+            "y_keys": [
+                "performance_score",
+                "price_score",
+                "screen_score",
+                "battery_score"
+            ],
+            "title": "Phone Model X Series Performance Comparison"
+        },
+        "summary": "You should choose the **XPro** model for extreme battery life, as it has the highest battery score of **95**, significantly outperforming the X and X2 models."
+    },
+    "metadata": {
+        "notes": [
+            "User asks to 'compare' multiple attributes across several products - classic radar chart scenario. Multiple numeric attributes for each entity (phone model) suit radar visualization well. Also, user asks for a recommendation based on one attribute (battery life), which can be highlighted in the summary."
+        ]
+    }
+}

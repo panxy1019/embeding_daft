@@ -1,0 +1,36 @@
+# Chinese translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-11-25 16:23+0800\n"
+"PO-Revision-Date: 2025-11-25 16:18+0800\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh\n"
+"Language-Team: zh <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/datetime_parser/_locales.jinja:1
+msgid ""
+"Given a list of strings sampled from a database column, identify the "
+"datetime format."
+msgstr "给定从数据库某一列中抽取的一组字符串，识别其日期时间格式。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/datetime_parser/_locales.jinja:2
+msgid ""
+"If they are datetime strings of the same format, output the Python "
+"strptime format string that can be used to parse them."
+msgstr "如果它们是相同格式的日期时间字符串，输出可用于解析它们的 Python strptime 格式字符串。"
+
+#: /Users/magolor/Utils/RubikSQL/RubikSQL-dev/src/rubiksql/resources/prompts/datetime_parser/_locales.jinja:3
+msgid "If they are not datetime strings or have mixed formats, output None."
+msgstr "如果它们不是日期时间字符串或格式混合，输出 None。"
+

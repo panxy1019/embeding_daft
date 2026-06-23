@@ -1,0 +1,36 @@
+{
+    "inputs": {
+        "question": "List all the tall players whose height is below 200 cm.",
+        "sql": "SELECT * FROM players WHERE height_cm BETWEEN 180 AND 200"
+    },
+    "expected": {
+        "predicates": {
+            "tall": {
+                "tab_id": "players",
+                "predicate": {
+                    "FIELD:height_cm": {
+                        ">=": 180
+                    }
+                }
+            },
+            "below 200 cm": {
+                "tab_id": "players",
+                "predicate": {
+                    "FIELD:height_cm": {
+                        "<=": 200
+                    }
+                }
+            }
+        },
+        "tables": {
+            "players": {
+                "tab_id": "players"
+            }
+        }
+    },
+    "metadata": {
+        "notes": [
+            "Though the SQL uses a BETWEEN clause, we can decompose the height condition into two separate predicates: 'tall' (height_cm >= 180) and 'below 200 cm' (height_cm <= 200)."
+        ]
+    }
+}

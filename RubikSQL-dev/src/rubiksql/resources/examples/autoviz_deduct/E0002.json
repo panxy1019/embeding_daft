@@ -1,0 +1,43 @@
+{
+    "inputs": {
+        "question": "List all products and their details",
+        "table_data": [
+            {
+                "product_id": "P001",
+                "name": "Laptop",
+                "category": "Electronics",
+                "price": 999.99,
+                "stock": 45,
+                "description": "High-performance laptop"
+            },
+            {
+                "product_id": "P002",
+                "name": "Mouse",
+                "category": "Electronics",
+                "price": 29.99,
+                "stock": 120,
+                "description": "Wireless optical mouse"
+            },
+            {
+                "product_id": "P003",
+                "name": "Desk Chair",
+                "category": "Furniture",
+                "price": 249.99,
+                "stock": 15,
+                "description": "Ergonomic office chair"
+            }
+        ],
+        "summarize": false
+    },
+    "expected": {
+        "viz_type": "table",
+        "config": {
+            "title": "Product List"
+        }
+    },
+    "metadata": {
+        "notes": [
+            "User wants to 'list' details. Text-heavy data with descriptions and mixed data types are best displayed in table format for readability."
+        ]
+    }
+}

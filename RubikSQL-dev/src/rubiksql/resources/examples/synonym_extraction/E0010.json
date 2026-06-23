@@ -1,0 +1,52 @@
+{
+    "inputs": {
+        "question": "What is the total legal exposure for open felony cases?",
+        "sql": "SELECT SUM(CASE WHEN crime_classification = 'felony' AND DATEDIFF(NOW(), crime_date) / 365 <= 5 AND NOT (status IN ('convicted', 'acquitted', 'dismissed')) THEN max_sentence_years ELSE 0 END) AS total_exposure FROM court_records"
+    },
+    "expected": {
+        "predicates": {
+            "open felony": {
+                "tab_id": "court_records",
+                "predicate": {
+                    "AND": [
+                        {
+                            "FIELD:crime_classification": {
+                                "==": "felony"
+                            }
+                        },
+                        {
+                            "FIELD:<years_since_crime>": {
+                                "<=": 5
+                            }
+                        },
+                        {
+                            "NOT": {
+                                "FIELD:status": {
+                                    "IN": [
+                                        "convicted",
+                                        "acquitted",
+                                        "dismissed"
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                "content": "For felonies cases, the statute of limitations is 5 years. `<years_since_crime>` is calculated as `DATEDIFF(NOW(), crime_date) / 365`."
+            }
+        },
+        "tables": {
+            "cases": {
+                "tab_id": "court_records"
+            }
+        },
+        "knowledge": {
+            "legal exposure": "In criminal law, 'exposure' is the maximum potential prison sentence if convicted on all charges. Use `SUM(max_sentence_years)` to calculate total exposure for relevant cases."
+        }
+    },
+    "metadata": {
+        "notes": [
+            "Notice since `DATEDIFF(NOW(), crime_date) / 365` is not a direct field in the table, we represent it as `<years_since_crime>` in the predicates, and then explain how it is calculated in the 'note'."
+        ]
+    }
+}

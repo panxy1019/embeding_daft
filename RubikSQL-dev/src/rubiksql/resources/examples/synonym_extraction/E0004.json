@@ -1,0 +1,24 @@
+{
+    "inputs": {
+        "question": "Show me the orders placed after December 31st, 2023",
+        "sql": "SELECT * FROM orders WHERE order_date > '2023-12-31'"
+    },
+    "expected": {
+        "predicates": {
+            "after December 31st, 2023": {
+                "tab_id": "orders",
+                "predicate": {
+                    "FIELD:order_date": {
+                        ">": "2023-12-31"
+                    }
+                }
+            }
+        },
+        "tables": {
+            "orders": {
+                "tab_id": "orders"
+            }
+        }
+    },
+    "metadata": {}
+}

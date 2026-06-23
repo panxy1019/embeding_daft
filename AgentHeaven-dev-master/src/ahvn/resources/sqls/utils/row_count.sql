@@ -1,0 +1,9 @@
+sqlite:     SELECT COUNT(*) as cnt FROM "{tab_name}";
+duckdb:     SELECT COUNT(*) as cnt FROM "{tab_name}";
+postgresql: SELECT COUNT(*) as cnt FROM "{tab_name}";
+mysql:      SELECT COUNT(*) as cnt FROM `{tab_name}`;
+mssql:      SELECT COUNT(*) as cnt FROM [{tab_name}];
+oracle:     SELECT COUNT(*) as cnt FROM "{tab_name}";
+starrocks:  SELECT COUNT(*) as cnt FROM `{tab_name}`;
+hive:       SELECT COUNT(*) as cnt FROM `{tab_name}`;
+trino:      SELECT COUNT(*) as cnt FROM "{tab_name}";

@@ -1,0 +1,28 @@
+{
+    "inputs": {
+        "question": "Show me all iPad models in the inventory",
+        "sql": "SELECT * FROM products WHERE product_name LIKE 'iPad %'"
+    },
+    "expected": {
+        "predicates": {
+            "iPad models": {
+                "tab_id": "products",
+                "predicate": {
+                    "FIELD:product_name": {
+                        "LIKE": "iPad %"
+                    }
+                }
+            }
+        },
+        "tables": {
+            "inventory": {
+                "tab_id": "products"
+            }
+        }
+    },
+    "metadata": {
+        "notes": [
+            "The LIKE predicate fully captures the iPad product line pattern, so no additional 'knowledge' is needed. Domain knowledge should only be extracted when it cannot be fully expressed as a predicate."
+        ]
+    }
+}

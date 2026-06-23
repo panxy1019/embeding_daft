@@ -1,0 +1,38 @@
+{
+    "inputs": {
+        "question": "What is the total GDP of Baltic nations?",
+        "sql": "SELECT SUM(gdp) AS total_gdp FROM countries WHERE country_code IN ('EST', 'LVA', 'LTU')"
+    },
+    "expected": {
+        "predicates": {
+            "Baltic nations": {
+                "tab_id": "countries",
+                "predicate": {
+                    "FIELD:country_code": {
+                        "IN": [
+                            "EST",
+                            "LVA",
+                            "LTU"
+                        ]
+                    }
+                }
+            }
+        },
+        "columns": {
+            "GDP": {
+                "tab_id": "countries",
+                "col_id": "gdp"
+            }
+        },
+        "tables": {
+            "nations": {
+                "tab_id": "countries"
+            }
+        }
+    },
+    "metadata": {
+        "hints": [
+            "Baltic nations refer to the countries Estonia (EST), Latvia (LVA), and Lithuania (LTU), which can be expressed as predicates. Otherwise, use 'knowledge' to explain the mapping in natural language."
+        ]
+    }
+}

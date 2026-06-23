@@ -1,0 +1,65 @@
+{#-
+Required:
+    col_id (str): Column identifier.
+    tab_id (Optional[str]): Table identifier.
+    datatype (str): Data type of the column.
+    description (Optional[str]): A brief description of the column.
+    n_rows (int): Number of rows in the table.
+    n_distincts (Optional[int]): Number of distinct values in the column.
+    n_nulls (Optional[int]): Number of null values in the column.
+    accum_enums (Optional[List[Tuple[Any, int, int]]]): List of (sampled) distinct values with their counts and accumulated counts.
+    stats (Optional[Dict[str, Any]]): Additional statistics about the column.
+Optional:
+    is_pk (bool): True if this column is a single-column primary key.
+    fks (List[Dict[str, str]]): Foreign key references, each with tab_ref, col_ref, name.
+Dependency:
+    None
+-#}
+{% set col_full_name = col_id | dumps_json if tab_id is not defined or not tab_id else (tab_id | dumps_json) + "." + (col_id | dumps_json) %}
+{% trans %}Column:{% endtrans %} {{ col_full_name }}
+{% if datatype is defined and datatype %}
+{% trans %}Data Type:{% endtrans %} {{ datatype }}
+{% endif %}
+{% if is_pk is defined and is_pk %}
+{% trans %}Primary Key:{% endtrans %} {% trans %}Yes{% endtrans %}
+
+{% endif %}
+{% if fks is defined and fks | length > 0 %}
+{% trans %}Foreign Key References:{% endtrans %}
+
+{% for fk in fks %}
+- {{ fk.tab_ref | dumps_json }}.{{ fk.col_ref | dumps_json }}{% if fk.name %} ({{ fk.name }}){% endif %}
+
+{% endfor %}
+{% endif %}
+{% if n_rows is defined and n_rows is not none %}
+{% trans %}Total Rows Count:{% endtrans %} {{ n_rows }}
+{% endif %}
+{% if n_distincts is defined and n_distincts is not none %}
+{% trans %}Distinct Values Count:{% endtrans %} {{ n_distincts }}
+{% endif %}
+{% if n_nulls is defined and n_nulls is not none %}
+{% trans %}NULL Values Count:{% endtrans %} {% if n_nulls > 0 %}{{ n_nulls }} ({{ "%.2f" | format(((n_nulls / n_rows * 100.0) if n_rows > 0 else 0.0)) }}%){% else %}{% trans %}None{% endtrans %}{% endif %}
+
+{% endif %}
+{% if description is defined and description %}
+{% trans %}Description:{% endtrans %} {{ description }}
+{% endif %}
+{% if accum_enums is defined and accum_enums | length > 0 %}
+{% trans %}Enum Values:{% endtrans %}
+
+{% for enum in accum_enums %}
+{% if enum is string %}
+{{ enum }}
+{% else %}
+- {{ enum[0] }} (freq={{ "%.2f" | format(((enum[1] / n_rows * 100.0) if n_rows > 0 else 0.0)) }}%, accum={{ "%.2f" | format(((enum[2] / n_rows * 100.0) if n_rows > 0 else 0.0)) }}%)
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if stats is defined and stats %}
+{% trans %}Stats:{% endtrans %}
+
+{% for key, value in stats.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}

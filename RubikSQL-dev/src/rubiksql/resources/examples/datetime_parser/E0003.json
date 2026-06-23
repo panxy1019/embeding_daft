@@ -1,0 +1,9 @@
+{
+    "inputs": {
+        "date_strs": [
+            "December 25, 2023",
+            "January 1, 2024"
+        ]
+    },
+    "expected": "%B %d, %Y"
+}

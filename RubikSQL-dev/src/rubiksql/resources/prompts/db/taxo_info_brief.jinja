@@ -1,0 +1,13 @@
+{#-
+Required:
+    taxo_id (str): Taxonomy identifier.
+    tab_id (str): Table identifier.
+    cols (List[str]): List of column names in the taxonomy.
+    description (Optional[str]): A brief description of the taxonomy.
+Optional:
+    None
+Dependency:
+    None
+-#}
+{% set taxo_full_name = (tab_id | dumps_json) + ".[" + (taxo_id | dumps_json) + "]" %}
+{{ taxo_full_name }}: {% trans %}Columns:{% endtrans %} ({{ cols | map('dumps_json') | join(", ") }}).{% if description is defined and description %} {{ description }}{% endif %}

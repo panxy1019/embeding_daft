@@ -1,0 +1,37 @@
+{
+    "inputs": {
+        "question": "Compare the performance of different products",
+        "table_data": [
+            {
+                "product_name": "Laptop Pro",
+                "rating": 4.5,
+                "reviews_count": 150,
+                "category": "Electronics"
+            },
+            {
+                "product_name": "Wireless Mouse",
+                "rating": 4.2,
+                "reviews_count": 89,
+                "category": "Electronics"
+            },
+            {
+                "product_name": "USB-C Hub",
+                "rating": 4.7,
+                "reviews_count": 203,
+                "category": "Electronics"
+            }
+        ],
+        "summarize": false
+    },
+    "expected": {
+        "viz_type": "table",
+        "config": {
+            "title": "Product Performance Comparison"
+        }
+    },
+    "metadata": {
+        "notes": [
+            "Although user asks to 'compare', the data contains text fields (rating as string, product names) that don't work well with charts. Table provides better readability for mixed data types."
+        ]
+    }
+}

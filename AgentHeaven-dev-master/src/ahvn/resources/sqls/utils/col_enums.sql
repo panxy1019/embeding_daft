@@ -1,0 +1,9 @@
+sqlite:     SELECT "{col_name}" AS col_enums FROM "{tab_name}";
+duckdb:     SELECT "{col_name}" AS col_enums FROM "{tab_name}";
+postgresql: SELECT "{col_name}" AS col_enums FROM "{tab_name}";
+mysql:      SELECT `{col_name}` AS col_enums FROM `{tab_name}`;
+mssql:      SELECT [{col_name}] AS col_enums FROM [{tab_name}];
+oracle:     SELECT "{col_name}" AS col_enums FROM "{tab_name}";
+starrocks:  SELECT `{col_name}` AS col_enums FROM `{tab_name}`;
+hive:       SELECT `{col_name}` AS col_enums FROM `{tab_name}`;
+trino:      SELECT "{col_name}" AS col_enums FROM "{tab_name}";

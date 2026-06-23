@@ -1,0 +1,59 @@
+config:
+    
+    provider: sqlite
+    database: "file:~/.ahvn/config.db"
+
+    # provider: duckdb
+    # database: "file:~/.ahvn/config.duckdb"
+
+    # provider: pg
+    # host: "localhost"
+    # port: 5432
+    # username: "postgres"
+    # password: ""
+    # database: "ahvn_config"
+
+    # provider: mysql
+    # host: "localhost"
+    # port: 3306
+    # username: "root"
+    # password: ""
+    # database: "ahvn_config"
+
+    # provider: mssql
+    # host: "localhost"
+    # port: 1433
+    # username: "sa"
+    # password: ""
+    # database: "ahvn_config"
+
+    # provider: oracle
+    # host: "localhost"
+    # port: 1521
+    # username: "system"
+    # password: ""
+    # database: "ahvn_config"
+
+    # provider: supabase
+    # host: "db.<project_ref>.supabase.co"
+    # username: "postgres"
+    # password: ""
+    # database: "ahvn_config"
+    
+    # provider: oceanbase
+    # host: "localhost"
+    # port: 2881
+    # username: "root@sys"
+    # database: "ahvn_config"
+
+    # provider: starrocks
+    # host: "localhost"
+    # port: 9030
+    # username: "root"
+    # database: "ahvn_config"
+
+    # provider: hive
+    # host: "localhost"
+    # port: 10000
+    # username: "hive"
+    # database: "ahvn_config"

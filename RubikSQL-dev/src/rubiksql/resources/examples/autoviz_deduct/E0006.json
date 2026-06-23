@@ -1,0 +1,48 @@
+{
+    "inputs": {
+        "question": "What's the total revenue?",
+        "table_data": [
+            {
+                "category": "North",
+                "revenue": 1500000
+            },
+            {
+                "category": "South",
+                "revenue": 1200000
+            },
+            {
+                "category": "East",
+                "revenue": 1800000
+            },
+            {
+                "category": "West",
+                "revenue": 634889
+            },
+            {
+                "category": "Total",
+                "revenue": 5134889
+            }
+        ],
+        "summarize": true
+    },
+    "expected": {
+        "viz_type": "kpi",
+        "config": {
+            "title": "Total Revenue",
+            "x_key": "category",
+            "y_keys": [
+                "revenue"
+            ],
+            "x_rows": [
+                "Total"
+            ],
+            "format": "$ {v/1000000:.2f} M"
+        },
+        "summary": "The total revenue is roughly **$5.1 million**."
+    },
+    "metadata": {
+        "notes": [
+            "User asks for total revenue in a dataset with multiple categories plus a 'Total' row. Using x_rows: ['Total'] selects only the aggregation row for KPI display, filtering out the individual category rows."
+        ]
+    }
+}

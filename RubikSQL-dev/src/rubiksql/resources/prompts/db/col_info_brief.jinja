@@ -1,0 +1,20 @@
+{#-
+Required:
+    col_id (str): Column identifier.
+    tab_id (Optional[str]): Table identifier.
+    datatype (str): Data type of the column.
+    description (Optional[str]): A brief description of the column.
+    n_nulls (Optional[int]): Number of null values in the column.
+    enums (Optional[List[Tuple[Any, int, int]]]): List of (sampled) distinct values with their counts.
+    short_stat (Optional[str]): A brief synthesized statistics string about the column.
+Optional:
+    None
+Dependency:
+    None
+-#}
+{% set col_full_name = col_id | dumps_json if tab_id is not defined or not tab_id else (tab_id | dumps_json) + "." + (col_id | dumps_json) %}
+{% set nullable_hint %}{% trans %}nullable{% endtrans %}{% endset %}
+{% set nullable = nullable_hint if (n_nulls is defined and n_nulls is not none and n_nulls > 0) else "" %}
+{% set sample_hint %}{% trans %}Example values:{% endtrans %}{% endset %}
+{% set enum_sample = sample_hint + " " + (enums | map('value_repr') | join(", ")) if (enums is defined and enums | length > 0) else "" %}
+{{ col_full_name }} ({{ datatype }}{% if nullable %}, {{ nullable }}{% endif %}):{% if description is defined and description %} {{ description }}.{% endif %}{% if short_stat is defined and short_stat %} {{ short_stat }}.{% endif %}{% if enum_sample %} {{ enum_sample }}.{% endif %}
