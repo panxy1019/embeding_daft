@@ -1,0 +1,88 @@
+# 基于数据湖 + Daft + RayCluster 构建 RubikSQL 的全链路方案
+
+当前已经有 RayCluster 集群，希望基于数据湖中的 Parquet 文件构建 RubikSQL 知识库。目标不是只优化 embedding，而是让 Daft 接管从数据湖读取、切分、分发到 Ray worker、构建 UKFT、生成/写入知识文件、构建向量索引的整条离线数据管线。
+
+整体分两阶段：
+
+- 第一阶段：Daft 接管数据湖读取、切分、任务分发和 RubikSQL/AgentHeaven build 调度，但暂时不接管 embedding。每个 worker 仍调用 AgentHeaven 现有 `LLM.embed()` 和 `VectorKLEngine` 完成 embedding 与 VectorStore 写入。
+- 第二阶段：Daft 全面接管 embedding 流程，先将待向量化的文本显式构造为 DataFrame，再基于 **Ray Cluster** 把数据分区调度到各个 worker；worker 在处理分区时，会​**动态通过 vLLM 拉起 Embedding 模型服务**​，并利用该服务完成批量向量化，最终生成的向量结果统一或分片写入 VectorStore。
+
+## 总览
+
+目标链路应该是：
+
+```text
+Data Lake Parquet
+    -> Daft read_parquet
+    -> Daft/Ray 按 db/table/column 分区
+    -> worker 构建 RubikSQL UKFT shard
+    -> UKFT shard 落盘
+    -> Phase 1: worker 调 AgentHeaven 原生 embedding + VectorStore 写入
+    -> Phase 2: Daft 统一抽取 vector candidates + 分布式 embedding + VectorStore commit
+    -> RubikSQL 查询时继续使用原来的 kb.search / fuzzy_enum / NL2SQL Agent
+```
+
+核心原则：
+
+1. Daft 负责大规模数据读取、切分、调度、批处理、容错和中间结果管理。
+2. RubikSQL 负责业务语义：什么是数据库、表、列、枚举、样例、技能。
+3. AgentHeaven 负责 UKF/UKFT 对象模型、encoder、VectorStore adapter 和现有查询接口。
+4. 第一阶段保守复用 AgentHeaven embedding，第二阶段再把 embedding 明确交给 Daft。
+
+### 当前同步链路
+
+```mermaid
+flowchart TD
+    A["RubikSQL build_enum"] --> B["生成 EnumUKFT"]
+    B --> C["kb.batch_upsert(all_enum_ukfts)"]
+    C --> D["KLBase.batch_upsert"]
+    D --> E["写 main storage"]
+    D --> F["VectorKLEngine.batch_upsert"]
+    F --> G["VectorKLEngine._batch_convert"]
+    G --> H["VectorDatabase.batch_k_encode_embed"]
+    H --> I["LLM.embed / LiteLLM provider"]
+    I --> J["VdbUKFAdapter.from_ukf"]
+    J --> K["TextNode"]
+    K --> L["VectorStore.add"]
+```
+
+问题在于 `build_enum()` 的知识构建和 `VectorKLEngine.batch_upsert()` 的 embedding/写入处于同步路径内。候选量大时，构建阶段会被 embedding provider、缓存、写入吞吐共同拖慢。
+
+### 目标链路
+
+```mermaid
+flowchart TD
+    A["Data Lake Parquet"] --> B["Daft read_parquet"]
+    M["Catalog / Manifest"] --> C["Lake Catalog Normalizer"]
+    B --> D["Daft Profiling Jobs"]
+    C --> D
+    D --> E["Schema / Column Profile / Enum Candidates"]
+    E --> F["UKFT Builder on Ray workers"]
+    F --> G["UKFT Shard Files"]
+    G --> H{"Phase"}
+    H -->|"Phase 1"| I["AgentHeaven native batch embedding"]
+    I --> J["VectorStore Shards or Committer"]
+    H -->|"Phase 2"| K["Daft Vector Candidate DataFrame"]
+    K --> L["Daft/Ray distributed embedding"]
+    L --> J
+    J --> N["Global VectorStore"]
+    G --> O["RubikSQL Main Knowledge Store"]
+    N --> P["Existing kb.search / NL2SQL Agent"]
+    O --> P
+```
+
+### 当前目标阶段一
+
+```text
+每个 worker:
+    1. 处理一个或多个 table/column shard
+    2. 生成 UKFT shard 文件
+    3. 建立 shard-local KB / vectorstore
+    4. 使用 AgentHeaven 原生 embedding 写入 shard vectorstore
+
+driver:
+    1. 收集所有 UKFT shard
+    2. 合并 main knowledge store
+    3. 合并或重建 global vectorstore
+
+```
