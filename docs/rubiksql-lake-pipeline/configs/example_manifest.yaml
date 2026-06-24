@@ -1,0 +1,121 @@
+# Example Lake Manifest for RubikBench dataset
+# Copy and modify this file for your specific data lake layout.
+
+run:
+  run_id: "auto"                                           # "auto" = timestamp-based ID
+  output_base: "/mnt/shared/rubiksql-build-runs"           # Shared storage path
+
+daft:
+  runner: ray                                              # "ray" or "py" (local)
+  target_partitions: 256                                   # Initial partition count
+
+rubiksql:
+  kb_name: rubikbench                                      # Knowledge base name
+  kb_root: "/mnt/shared/rubiksql-kb"                       # Where to store the global KB
+
+phase1:
+  enabled: true
+  agentheaven_embedding: true                              # Use AgentHeaven native embedding
+  shard_vectorstore: true                                  # Each worker writes its own vectorstore
+  merge_after_build: true                                  # Driver collects and merges all shards
+
+enum_policy:
+  default_enabled_for:                                     # Auto-enable for these types
+    - text
+    - categorical
+  max_distinct_count: 100000                               # Skip columns above this threshold
+  max_distinct_ratio: 0.2                                  # Skip if distinct/total > this
+  min_frequency: 1                                         # Minimum frequency to include
+
+# ================================================================
+# Database definitions
+# ================================================================
+# Paths should be accessible from ALL nodes (use absolute paths or shared storage paths)
+# Parquet directory structure: {db_id}/{table_id}/*.parquet
+
+databases:
+  - db_id: sales
+    description: "Sales analytics data warehouse"
+    tables:
+      - table_id: orders
+        path: "/data/rubikbench/sales/orders/*.parquet"
+        description: "Customer order records"
+        primary_key: ["order_id"]
+        columns:
+          - col_id: order_status
+            description: "Order lifecycle status (pending/confirmed/shipped/delivered/cancelled)"
+            enum_index_enabled: true                        # Force enable
+          - col_id: payment_method
+            description: "Payment method used"
+            enum_index_enabled: true
+          - col_id: shipping_country
+            description: "Destination country"
+            enum_index_enabled: true
+          - col_id: total_amount
+            description: "Order total in USD"
+            datatype: number
+            enum_index_enabled: false                       # Numeric, no enum needed
+          - col_id: customer_id
+            description: "Foreign key to customers table"
+            datatype: identifier
+            enum_index_enabled: false                       # High cardinality FK
+
+      - table_id: customers
+        path: "/data/rubikbench/sales/customers/*.parquet"
+        description: "Customer master data"
+        primary_key: ["customer_id"]
+        columns:
+          - col_id: country
+            description: "Customer's country"
+            enum_index_enabled: true
+          - col_id: city
+            description: "Customer's city"
+            enum_index_enabled: true
+          - col_id: customer_segment
+            description: "Market segment (retail/corporate/wholesale)"
+            enum_index_enabled: true
+          - col_id: email
+            description: "Customer email address"
+            enum_index_enabled: false                       # High cardinality, unique
+
+      - table_id: products
+        path: "/data/rubikbench/sales/products/*.parquet"
+        description: "Product catalog"
+        primary_key: ["product_id"]
+        columns:
+          - col_id: category
+            description: "Product category"
+            enum_index_enabled: true
+          - col_id: brand
+            description: "Product brand name"
+            enum_index_enabled: true
+          - col_id: unit_price
+            description: "Unit price"
+            datatype: number
+            enum_index_enabled: false
+
+  - db_id: hr
+    description: "Human resources database"
+    tables:
+      - table_id: employees
+        path: "/data/rubikbench/hr/employees/*.parquet"
+        description: "Employee records"
+        primary_key: ["employee_id"]
+        columns:
+          - col_id: department
+            description: "Department name"
+            enum_index_enabled: true
+          - col_id: job_title
+            description: "Job title"
+            enum_index_enabled: true
+          - col_id: employment_status
+            description: "Active/Inactive/On Leave"
+            enum_index_enabled: true
+          - col_id: salary
+            description: "Annual salary"
+            datatype: number
+            enum_index_enabled: false
+          - col_id: hire_date
+            description: "Date of hire"
+            datatype: datetime
+            enum_index_enabled: false

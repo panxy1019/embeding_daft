@@ -1,0 +1,25 @@
+# Core pipeline dependencies
+daft>=0.4.0
+ray[default]>=2.40.0
+pyarrow>=15.0.0
+pydantic>=2.0
+pyyaml>=6.0
+click>=8.0
+loguru>=0.7.0
+
+# Vector DB
+lancedb
+llama-index-vector-stores-lancedb
+
+# LLM abstraction (AgentHeaven dependency)
+litellm
+
+# Templates (AgentHeaven dependency)
+jinja2
+
+# SQL (AgentHeaven dependency)
+sqlalchemy>=2.0
+
+# AgentHeaven & RubikSQL (install from local source)
+# cd AgentHeaven-dev-master && pip install -e .
+# cd RubikSQL-dev && pip install -e .
