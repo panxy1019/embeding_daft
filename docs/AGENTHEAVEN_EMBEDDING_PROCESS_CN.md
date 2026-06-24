@@ -6,6 +6,44 @@
 
 AgentHeaven 的 embedding 主线可以概括为：
 
+
+```mermaid
+flowchart TD
+    K["Daft Vector Candidate DataFrame"] --> Q["Candidate Batch Queue"]
+
+    subgraph R["RayWorker Pipeline"]
+        direction TD
+        P["Ray Worker Pipeline Controller"]
+        S["Scheduling / Pooling Logic"]
+        P --> S
+    end
+
+    Q --> P
+
+    subgraph V["vLLM Embedding Pool"]
+        direction TD
+        V0["vLLM Serving Layer"]
+        M1["Embedding Model Instance 1"]
+        M2["Embedding Model Instance 2"]
+        M3["Embedding Model Instance N"]
+        V0 --> M1
+        V0 --> M2
+        V0 --> M3
+    end
+
+    S --> V0
+
+    M1 --> E["Embedding Result Merge"]
+    M2 --> E
+    M3 --> E
+
+    E --> O["Ray / Daft Distributed Embedding Output"]
+    O --> J["VectorStore Shards or Committer"]
+
+```
+
+
+
 ```text
 UKF 知识对象
   -> k_encoder 生成入库文本 key
