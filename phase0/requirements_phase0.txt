@@ -1,0 +1,22 @@
+# Phase0 packages validated in the ray-submit conda environment.
+# Prefer conda install where the package exists in conda-forge.
+daft==0.7.15
+lancedb==0.30.0
+llama-index-core==0.14.23
+litellm==1.81.6
+sqlalchemy==2.0.51
+loguru==0.7.3
+termcolor==3.3.0
+pyahocorasick==2.3.0
+pandas
+openai
+omegaconf
+diskcache
+prettytable
+tenacity
+dill
+cloudpickle
+
+# Note: llama-index-vector-stores-lancedb was not available from the tested
+# conda channels, but llama_index.vector_stores.lancedb imports successfully
+# in the validated environment and LanceDB write/read validation passed.

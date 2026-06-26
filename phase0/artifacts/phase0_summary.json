@@ -1,0 +1,38 @@
+{
+  "status": "success",
+  "db_id": "RubikBench",
+  "table_id": "PROFIT_AND_LOSS",
+  "parquet_uri": "s3://rubikbench/rubikbench_parquet/RubikBench/PROFIT_AND_LOSS/data_0.parquet",
+  "output_dir": "/home/admin/testpanxy/ray_job_test/rubiksql/embeding_daft-phase0/phase0_output",
+  "log_path": "/home/admin/testpanxy/ray_job_test/rubiksql/embeding_daft-phase0/phase0_output/logs/single_node_build.log",
+  "error": null,
+  "notes": "Phase0 uses one process on serve00 and does not start Ray, RayCluster, or Daft distributed scheduling.",
+  "schema_text": "╭─────────────────────────┬─────────╮\n│ Column Name             ┆ DType   │\n╞═════════════════════════╪═════════╡\n│ period                  ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ overseas_flag_name_en   ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ overseas_flag_name_zh   ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ sales_region_name_en    ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ sales_region_name_zh    ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ country_name_en         ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ country_name_zh         ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ national_area_name_en   ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ national_area_name_zh   ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ province_name_en        ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ province_name_zh        ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ city_name_en            ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ city_name_zh            ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ dealer_lv1_name_en      ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ dealer_lv1_name_zh      ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ dealer_lv2_name_en      ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ dealer_lv2_name_zh      ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ dealer_lv3_name_en      ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ dealer_lv3_name_zh      ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ cust_lv1_name_en        ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ cust_lv1_name_zh        ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ cust_lv2_name_en        ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ cust_lv2_name_zh        ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ cust_lv3_name_en        ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ cust_lv3_name_zh        ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ cust_lv4_name_en        ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ cust_lv4_name_zh        ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ prod_lv0_name_en        ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ prod_lv0_name_zh        ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ prod_lv1_name_en        ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ prod_lv1_name_zh        ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ prod_lv2_name_en        ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ prod_lv2_name_zh        ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ prod_lv3_name_en        ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ prod_lv3_name_zh        ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ report_item_lv0_name_en ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ report_item_lv0_name_zh ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ report_item_lv1_name_en ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ report_item_lv1_name_zh ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ report_item_lv2_name_en ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ report_item_lv2_name_zh ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ report_item_lv3_name_en ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ report_item_lv3_name_zh ┆ String  │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ ptd_amt_a_cny           ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ ptd_amt_a_usd           ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ ptd_amt_a_eur           ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ ptd_amt_b_cny           ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ ptd_amt_b_usd           ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ ptd_amt_b_eur           ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ ytd_amt_a_cny           ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ ytd_amt_a_usd           ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ ytd_amt_a_eur           ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ ytd_amt_b_cny           ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ ytd_amt_b_usd           ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ ytd_amt_b_eur           ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ py_ptd_amt_a_cny        ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ py_ptd_amt_a_usd        ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ py_ptd_amt_a_eur        ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ py_ptd_amt_b_cny        ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ py_ptd_amt_b_usd        ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ py_ptd_amt_b_eur        ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ py_ytd_amt_a_cny        ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ py_ytd_amt_a_usd        ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ py_ytd_amt_a_eur        ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ py_ytd_amt_b_cny        ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ py_ytd_amt_b_usd        ┆ Float64 │\n├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤\n│ py_ytd_amt_b_eur        ┆ Float64 │\n╰─────────────────────────┴─────────╯\n",
+  "schema_column_count": 67,
+  "profiled_column_count": 67,
+  "sample_rows_actual": 5000,
+  "ukft_count": 79,
+  "ukft_counts": {
+    "database_ukfts": 1,
+    "table_ukfts": 1,
+    "column_ukfts": 67,
+    "enum_ukfts": 10,
+    "enum_columns": 8,
+    "total_ukfts": 79
+  },
+  "ukft_class_counts": {
+    "DatabaseUKFT": 1,
+    "TableUKFT": 1,
+    "ColumnUKFT": 67,
+    "EnumUKFT": 10
+  },
+  "ukft_jsonl": "/home/admin/testpanxy/ray_job_test/rubiksql/embeding_daft-phase0/phase0_output/ukfts.jsonl",
+  "sqlite_path": "/home/admin/testpanxy/ray_job_test/rubiksql/embeding_daft-phase0/phase0_output/sqlite/main.db",
+  "sqlite_exists": true,
+  "lance_path": "/home/admin/testpanxy/ray_job_test/rubiksql/embeding_daft-phase0/phase0_output/lance",
+  "lance_exists": true,
+  "embedding_count": 10,
+  "embedding_time_sec": 1.133,
+  "embedding_error": null,
+  "lance_row_count": 10
+}
