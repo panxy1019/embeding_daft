@@ -20,3 +20,5 @@ cloudpickle
 # Note: llama-index-vector-stores-lancedb was not available from the tested
 # conda channels, but llama_index.vector_stores.lancedb imports successfully
 # in the validated environment and LanceDB write/read validation passed.
+boto3
+botocore

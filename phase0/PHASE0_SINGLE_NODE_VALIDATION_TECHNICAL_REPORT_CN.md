@@ -384,3 +384,39 @@ Phase0 的 `build_table()` 可以作为 Worker 内部构建函数复用。后续
 Phase0 Single Node Validation 已经达到预期目标：在不启动 Ray、不修改集群配置、不影响其他用户的前提下，验证了 RubikSQL 从 MinIO Parquet 到 UKFT、SQLite、LanceDB 和 Embedding 的单节点完整链路。
 
 Phase0 产出的 `build_table()` 具备后续迁移到 Ray Worker 的接口形态，建议作为 Phase1 分布式构建任务的核心复用函数。
+
+
+## 13. MinIO 上传更新
+
+Phase0 已从“只写本地目录”升级为“本地构建缓存 + MinIO 数据湖上传”。LanceDB 和 SQLite 仍先写入本地 `output_dir`，因为 LanceDB/SQLite 的写入语义以本地目录/文件为核心；构建完成后，脚本会递归上传整个输出目录到：
+
+```text
+s3://rubiksql-build-runs/phase0/<db_id>/<table_id>/<run_id>/
+```
+
+新增参数：
+
+- `--s3-output-root`：MinIO/S3 输出根路径，默认 `s3://rubiksql-build-runs/phase0`。
+- `--run-id`：构建 run id；不传时自动生成 UTC 时间戳。
+- `--skip-s3-upload`：只保留本地输出，不上传 MinIO。
+
+本次修复后验证通过的输出路径：
+
+```text
+s3://rubiksql-build-runs/phase0/RubikBench/PROFIT_AND_LOSS/phase0_minio_upload_validation_fixed_20260626T081207Z/
+```
+
+验证结果：MinIO prefix 下可列到 17 个对象，总大小 1,487,898 bytes；其中包含 `ukfts.jsonl`、`phase0_summary.json`、SQLite 文件、LanceDB data/manifest/transaction 文件和日志。
+
+同时修复了 `lancedb==0.30.0` 下 `db.list_tables()` 返回 `ListTablesResponse` 导致 row count 误判的问题。修复后 `vec_enums` row count 为 10，与 embedding 数量一致。
+
+## 14. RubikSQL 使用方式
+
+RubikSQL 的使用分为两个阶段：
+
+1. 构建知识库：从数据源生成 DatabaseUKFT、TableUKFT、ColumnUKFT、EnumUKFT，并写入 SQLite 与 LanceDB。
+2. 使用知识库：RubikSQL Retrieval/Agent 在 NL2SQL 时检索这些知识，辅助生成 SQL。
+
+Phase0 当前完成的是第 1 阶段，并把产物上传到 MinIO。第 2 阶段还需要补一个“从 MinIO build run 注册/导入 RubikSQL KB”的步骤，才能直接通过 `rubiksql search` 或 `rubiksql ask` 使用。
+
+完整说明见：`phase0/RUBIKSQL_USAGE_CN.md`。

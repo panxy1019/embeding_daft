@@ -135,7 +135,7 @@ Phase0 流程：
 
 ```bash
 PYTHONPATH="$PWD/docs/rubiksql-lake-pipeline/src:$PWD/RubikSQL-dev/src:$PWD/AgentHeaven-dev-master/src" \
-MINIO_SECRET_ACCESS_KEY=password123 \
+MINIO_SECRET_ACCESS_KEY='<minio-secret>' \
 HTTP_PROXY=http://127.0.0.1:17894 \
 HTTPS_PROXY=http://127.0.0.1:17894 \
 NO_PROXY=127.0.0.1,localhost,10.42.0.29 \

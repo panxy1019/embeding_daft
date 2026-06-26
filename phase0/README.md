@@ -37,3 +37,14 @@ Important files:
 - `artifacts/ukfts.jsonl`: generated UKFT sample artifact from the validation run.
 
 No cluster, Ray, Kubernetes, or NPU configuration is changed by this code.
+
+Additional documentation:
+
+- `RUBIKSQL_USAGE_CN.md`: how to use RubikSQL and how Phase0 artifacts fit into the later NL2SQL flow.
+
+MinIO upload example:
+
+```bash
+export MINIO_SECRET_ACCESS_KEY='<minio-secret>'
+./scripts/run_phase0_single_node.sh --output-dir ./phase0_output --s3-output-root s3://rubiksql-build-runs/phase0
+```

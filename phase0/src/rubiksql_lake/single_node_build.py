@@ -46,6 +46,9 @@ class BuildTableConfig:
     s3_region: str = "us-east-1"
     s3_access_key_id: str = "admin"
     s3_secret_access_key: Optional[str] = None
+    s3_output_root: Optional[str] = "s3://rubiksql-build-runs/phase0"
+    run_id: Optional[str] = None
+    skip_s3_upload: bool = False
     sample_rows: int = 5000
     max_columns: int = 0
     max_enum_columns: int = 8
@@ -94,20 +97,97 @@ def _setup_logging(output_dir: Path) -> Path:
     return log_path
 
 
-def _make_io_config(config: BuildTableConfig) -> IOConfig:
+def _get_s3_secret(config: BuildTableConfig) -> str:
     secret = config.s3_secret_access_key or os.environ.get("MINIO_SECRET_ACCESS_KEY") or os.environ.get("AWS_SECRET_ACCESS_KEY")
     if not secret:
         raise ValueError("Missing S3 secret. Set MINIO_SECRET_ACCESS_KEY or pass --s3-secret-access-key.")
+    return secret
+
+
+def _make_io_config(config: BuildTableConfig) -> IOConfig:
     return IOConfig(
         s3=S3Config(
             region_name=config.s3_region,
             endpoint_url=config.s3_endpoint_url,
             key_id=config.s3_access_key_id,
-            access_key=secret,
+            access_key=_get_s3_secret(config),
             use_ssl=config.s3_endpoint_url.startswith("https://"),
             force_virtual_addressing=False,
         )
     )
+
+
+def _sanitize_s3_path_part(value: Any) -> str:
+    safe = "".join(ch if ch.isalnum() or ch in ("-", "_", ".") else "_" for ch in str(value))
+    return safe.strip("_") or "unknown"
+
+
+def _parse_s3_uri(uri: str) -> Tuple[str, str]:
+    if not uri.startswith("s3://"):
+        raise ValueError(f"S3 URI must start with s3://, got: {uri}")
+    rest = uri[5:]
+    bucket, _, prefix = rest.partition("/")
+    if not bucket:
+        raise ValueError(f"S3 URI is missing bucket: {uri}")
+    return bucket, prefix.strip("/")
+
+
+def _resolve_s3_output_uri(config: BuildTableConfig, run_id: str) -> Optional[str]:
+    if config.skip_s3_upload or not config.s3_output_root:
+        return None
+    root = config.s3_output_root.rstrip("/")
+    db_part = _sanitize_s3_path_part(config.db_id)
+    table_part = _sanitize_s3_path_part(config.table_id)
+    run_part = _sanitize_s3_path_part(run_id)
+    return f"{root}/{db_part}/{table_part}/{run_part}"
+
+
+def _make_s3_client(config: BuildTableConfig) -> Any:
+    import boto3
+    from botocore.config import Config as BotoConfig
+
+    return boto3.client(
+        "s3",
+        endpoint_url=config.s3_endpoint_url,
+        region_name=config.s3_region,
+        aws_access_key_id=config.s3_access_key_id,
+        aws_secret_access_key=_get_s3_secret(config),
+        config=BotoConfig(s3={"addressing_style": "path"}),
+    )
+
+
+def _upload_path_to_s3(client: Any, bucket: str, prefix: str, local_root: Path, path: Path) -> Tuple[str, int]:
+    rel = path.relative_to(local_root).as_posix()
+    key = f"{prefix}/{rel}" if prefix else rel
+    client.upload_file(str(path), bucket, key)
+    return key, int(path.stat().st_size)
+
+
+def _upload_paths_to_s3(paths: Iterable[Path], local_root: Path, s3_uri: str, config: BuildTableConfig) -> Dict[str, Any]:
+    bucket, prefix = _parse_s3_uri(s3_uri)
+    client = _make_s3_client(config)
+    uploaded_keys: List[str] = []
+    uploaded_bytes = 0
+    for path in sorted(paths):
+        if not path.is_file():
+            continue
+        key, size = _upload_path_to_s3(client, bucket, prefix, local_root, path)
+        uploaded_keys.append(key)
+        uploaded_bytes += size
+    return {"uploaded_keys": uploaded_keys, "uploaded_bytes": uploaded_bytes}
+
+
+def _upload_output_to_s3(output_dir: Path, s3_uri: str, config: BuildTableConfig) -> Dict[str, Any]:
+    files = [path for path in sorted(output_dir.rglob("*")) if path.is_file()]
+    logger.info("Uploading {} output files to {}", len(files), s3_uri)
+    upload = _upload_paths_to_s3(files, output_dir, s3_uri, config)
+    logger.info("Uploaded {} files to {}", len(upload["uploaded_keys"]), s3_uri)
+    return {
+        "s3_upload_status": "success",
+        "s3_output_uri": s3_uri,
+        "s3_uploaded_files": len(upload["uploaded_keys"]),
+        "s3_uploaded_bytes": upload["uploaded_bytes"],
+    }
 
 
 def _load_sample(config: BuildTableConfig) -> Tuple[Any, str, List[str], pd.DataFrame]:
@@ -261,10 +341,13 @@ def _lance_row_count(lance_dir: Path, table_name: str) -> int:
         import lancedb
 
         db = lancedb.connect(str(lance_dir))
-        if table_name not in db.list_tables():
+        table_response = db.list_tables()
+        table_names = getattr(table_response, "tables", table_response)
+        if table_name not in table_names:
             return 0
         return int(db.open_table(table_name).count_rows())
     except Exception:
+        logger.exception("Failed to read LanceDB row count from {}", lance_dir)
         return 0
 
 
@@ -351,6 +434,10 @@ def _write_agentheaven_kb(
     result["sqlite_exists"] = sqlite_path.exists()
     result["lance_row_count"] = _lance_row_count(lance_dir, "vec_enums")
     result["lance_exists"] = result["lance_row_count"] >= result["embedding_count"] if result["embedding_count"] else result["lance_row_count"] > 0
+    if result["embedding_count"] and result["lance_row_count"] < result["embedding_count"]:
+        raise RuntimeError(
+            f"LanceDB row count {result['lance_row_count']} is smaller than embedding count {result['embedding_count']}"
+        )
     return result
 
 
@@ -363,7 +450,10 @@ def _write_report(output_dir: Path, summary: Dict[str, Any]) -> Path:
         f"- Database: {summary.get('db_id')}",
         f"- Table: {summary.get('table_id')}",
         f"- Parquet: `{summary.get('parquet_uri')}`",
+        f"- Run ID: {summary.get('run_id')}",
         f"- Output: `{output_dir}`",
+        f"- S3 upload: {summary.get('s3_upload_status')}",
+        f"- S3 output: `{summary.get('s3_output_uri')}`",
         f"- Schema columns: {summary.get('schema_column_count')}",
         f"- Profiled columns: {summary.get('profiled_column_count')}",
         f"- Sample rows: {summary.get('sample_rows_actual')}",
@@ -381,6 +471,8 @@ def _write_report(output_dir: Path, summary: Dict[str, Any]) -> Path:
         lines.extend(["", "## Error", "", "```", str(summary["error"]), "```"])
     if summary.get("embedding_error"):
         lines.extend(["", "## Embedding Error", "", "```", str(summary["embedding_error"]), "```"])
+    if summary.get("s3_upload_error"):
+        lines.extend(["", "## S3 Upload Error", "", "```", str(summary["s3_upload_error"]), "```"])
     report_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return report_path
 
@@ -389,16 +481,24 @@ def build_table(config: BuildTableConfig) -> Dict[str, Any]:
     output_dir = Path(config.output_dir).resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
     log_path = _setup_logging(output_dir)
+    run_id = config.run_id or time.strftime("%Y%m%dT%H%M%SZ", time.gmtime())
+    s3_output_uri = _resolve_s3_output_uri(config, run_id)
     logger.info("Phase0 single-node validation started")
-    logger.info("Config: {}", asdict(config) | {"s3_secret_access_key": "***" if config.s3_secret_access_key else None})
+    safe_config = asdict(config) | {"s3_secret_access_key": "***" if config.s3_secret_access_key else None, "run_id": run_id}
+    logger.info("Config: {}", safe_config)
 
     summary: Dict[str, Any] = {
         "status": "failed",
         "db_id": config.db_id,
         "table_id": config.table_id,
+        "run_id": run_id,
         "parquet_uri": config.parquet_uri,
         "output_dir": str(output_dir),
         "log_path": str(log_path),
+        "s3_upload_requested": bool(s3_output_uri),
+        "s3_output_uri": s3_output_uri,
+        "s3_upload_status": "skipped" if not s3_output_uri else "pending",
+        "s3_upload_error": None,
         "error": None,
         "notes": "Phase0 uses one process on serve00 and does not start Ray, RayCluster, or Daft distributed scheduling.",
     }
@@ -441,12 +541,34 @@ def build_table(config: BuildTableConfig) -> Dict[str, Any]:
         logger.exception("Phase0 failed")
     finally:
         summary_path = output_dir / "phase0_summary.json"
+        summary["summary_path"] = str(summary_path)
         summary_path.write_text(json.dumps(summary, indent=2, ensure_ascii=False, default=_json_default), encoding="utf-8")
         report_path = _write_report(output_dir, summary)
-        summary["summary_path"] = str(summary_path)
         summary["report_path"] = str(report_path)
+        summary_path.write_text(json.dumps(summary, indent=2, ensure_ascii=False, default=_json_default), encoding="utf-8")
+
+        if s3_output_uri:
+            try:
+                upload_result = _upload_output_to_s3(output_dir, s3_output_uri, config)
+                summary.update(upload_result)
+                summary_path.write_text(json.dumps(summary, indent=2, ensure_ascii=False, default=_json_default), encoding="utf-8")
+                report_path = _write_report(output_dir, summary)
+                summary["report_path"] = str(report_path)
+                summary_path.write_text(json.dumps(summary, indent=2, ensure_ascii=False, default=_json_default), encoding="utf-8")
+                _upload_paths_to_s3([summary_path, report_path], output_dir, s3_output_uri, config)
+            except Exception as upload_exc:
+                summary["status"] = "failed"
+                summary["s3_upload_status"] = "failed"
+                summary["s3_upload_error"] = repr(upload_exc)
+                summary_path.write_text(json.dumps(summary, indent=2, ensure_ascii=False, default=_json_default), encoding="utf-8")
+                report_path = _write_report(output_dir, summary)
+                summary["report_path"] = str(report_path)
+                logger.exception("S3 upload failed")
+
         logger.info("Summary written: {}", summary_path)
         logger.info("Report written: {}", report_path)
+        if summary.get("s3_output_uri"):
+            logger.info("S3 output URI: {}", summary.get("s3_output_uri"))
     return summary
 
 
@@ -460,6 +582,9 @@ def parse_args() -> BuildTableConfig:
     parser.add_argument("--s3-region", default=BuildTableConfig.s3_region)
     parser.add_argument("--s3-access-key-id", default=BuildTableConfig.s3_access_key_id)
     parser.add_argument("--s3-secret-access-key", default=None)
+    parser.add_argument("--s3-output-root", default=BuildTableConfig.s3_output_root)
+    parser.add_argument("--run-id", default=None)
+    parser.add_argument("--skip-s3-upload", action="store_true")
     parser.add_argument("--sample-rows", type=int, default=BuildTableConfig.sample_rows)
     parser.add_argument("--max-columns", type=int, default=BuildTableConfig.max_columns)
     parser.add_argument("--max-enum-columns", type=int, default=BuildTableConfig.max_enum_columns)
@@ -476,6 +601,9 @@ def parse_args() -> BuildTableConfig:
         s3_region=args.s3_region,
         s3_access_key_id=args.s3_access_key_id,
         s3_secret_access_key=args.s3_secret_access_key,
+        s3_output_root=args.s3_output_root,
+        run_id=args.run_id,
+        skip_s3_upload=args.skip_s3_upload,
         sample_rows=args.sample_rows,
         max_columns=args.max_columns,
         max_enum_columns=args.max_enum_columns,
