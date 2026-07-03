@@ -1009,3 +1009,108 @@ Dagster 作为数据架构的中央面板，为 Daft + Ray Cluster + S3 数据�
 6. **环境级的隔离**：开发、测试、生产环境的无缝切换
 
 这种架构使得数据湖的构建和维护变得更加可控、可观测、可扩展，Dagster 真正成为了整个数据架构的"中央控制面板"。
+
+
+## 基于 Dagster 的数据湖构建任务架构
+
+### 架构概述
+
+在本方案中，Dagster 作为**数据架构中央面板**，统一编排和管理整个数据湖构建流程。整个架构包含以下核心组件：
+
+| 组件 | 角色 | Dagster 中的对应概念 |
+|------|------|---------------------|
+| **Dagster** | 数据编排与中央控制面板 | 编排引擎 + UI |
+| **Daft** | 分布式数据处理引擎 | 计算层（Op/Asset 的计算逻辑） |
+| **Ray Cluster** | 分布式计算资源池 | 执行环境（Ray Executor/Run Launcher） |
+| **S3 数据湖** | 数据存储层 | I/O Manager + 资产物化目标 |
+| **RUBKITSQL** | SQL 查询引擎 | 消费层 + 资产查询接口 |
+
+### Dagster 作为中央面板的核心职责
+
+1. **资产目录管理**：统一管理数据湖中所有数据资产的元数据和血缘
+2. **任务编排调度**：协调数据处理任务的执行顺序和依赖关系
+3. **资源统一管理**：统一管理 Ray 集群、S3、SQL 引擎等外部资源
+4. **数据质量监控**：通过 Asset Checks 监控各层数据的质量
+5. **运行状态可观测**：提供统一的 UI 查看所有任务的运行状态和日志
+6. **分区与回填管理**：管理数据湖的分区策略和历史数据回填
+
+---
+### Dagster 资源配置
+
+在开始构建之前，首先需要在 Dagster 的 `Definitions` 中配置所有必要的资源。
+
+#### Ray Cluster Resource
+
+Ray 集群作为分布式计算资源，通过 `dagster-ray` 集成：
+
+- **Ray Resource**：管理与 Ray 集群的连接
+- **Ray Executor**：将 Dagster 的 Op/Asset 步骤提交到 Ray 集群执行
+- **Ray Run Launcher**（可选）：将整个 Dagster Run 作为 Ray 作业提交
+
+#### S3 I/O Manager
+
+S3 作为数据湖的存储层，需要自定义 I/O Manager：
+
+- **S3 Parquet I/O Manager**：读写 S3 上的 Parquet 文件
+- **S3 Delta Lake I/O Manager**：读写 S3 上的 Delta Lake 表
+- 每个 I/O Manager 配置对应的 S3 桶、前缀、访问凭证等
+
+#### Daft Resource
+
+Daft 作为数据处理引擎，封装为 Dagster Resource：
+
+- 管理 Daft 的 Ray Runner 配置
+- 统一管理 Daft 的执行参数（并行度、内存配置等）
+- 确保 Daft 与 Ray 集群的正确连接
+
+#### RUBKITSQL Resource
+
+RUBKITSQL 作为查询引擎，封装为 Dagster Resource：
+
+- 管理 RUBKITSQL 的连接配置
+- 支持执行 SQL 语句创建视图、表
+- 支持查询数据质量验证
+
+#### 物化过程
+
+当 `raw_users` 资产被物化时：
+
+1. **Dagster 触发资产物化**
+   
+   - 可以通过调度（每天凌晨触发）
+   - 可以通过传感器（源系统有新数据时触发）
+   - 可以通过声明式自动化（`AutomationCondition.on_cron(...)`）
+2. **Dagster 分配计算资源**
+   
+   - 通过 Ray Executor 将物化任务提交到 Ray Cluster
+   - 为该任务分配必要的 CPU/内存资源
+3. **Daft 执行数据抽取**
+   
+   - Daft 使用 Ray Runner 连接到 Ray Cluster
+   - Daft 从源系统（数据库/API/消息队列）读取数据
+   - Daft 将数据转换为分布式 DataFrame
+4. **数据写入 S3**
+   
+   - Dagster 的 S3 Parquet I/O Manager 接管输出
+   - I/O Manager 将 Daft DataFrame 写入 S3 的对应分区路径
+   - 写入路径：`s3://data-lake/bronze/users/date=YYYY-MM-DD/`
+5. **Dagster 记录物化事件**
+   
+   - 记录物化时间、数据行数、文件大小等元数据
+   - 更新资产状态为"已物化"
+   - 触发下游资产的自动化条件评估
+
+
+## 总结
+
+Dagster 作为数据架构的中央面板，为 Daft + Ray Cluster + S3 数据湖 + RUBKITSQL 的技术栈提供了：
+
+1. **统一的资产视图**：所有数据资产统一管理，清晰的血缘关系
+2. **声明式的编排**：通过 Software-Defined Assets 和 Automation Condition 实现自动化
+3. **分布式计算集成**：通过 Ray 集成支持大规模分布式数据处理
+4. **灵活的存储抽象**：通过 I/O Manager 统一管理 S3 数据湖的读写
+5. **完整的可观测性**：从任务运行到数据质量的全面监控
+6. **环境级的隔离**：开发、测试、生产环境的无缝切换
+
+这种架构使得数据湖的构建和维护变得更加可控、可观测、可扩展，Dagster 真正成为了整个数据架构的"中央控制面板"。
+
