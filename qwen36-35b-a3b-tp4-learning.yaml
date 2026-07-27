@@ -1,0 +1,172 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: qwen36-35b-a3b-tp4-learning-launcher
+  namespace: k12
+data:
+  start_vllm.sh: |
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    export PYTORCH_NPU_ALLOC_CONF=expandable_segments:True
+    export HCCL_OP_EXPANSION_MODE=AIV
+    export HCCL_BUFFSIZE=1024
+    export OMP_NUM_THREADS=1
+    export TASK_QUEUE_ENABLE=1
+
+    echo "ASCEND_VISIBLE_DEVICES=${ASCEND_VISIBLE_DEVICES:-unset}"
+    echo "ASCEND_RT_VISIBLE_DEVICES=${ASCEND_RT_VISIBLE_DEVICES:-unset}"
+    ls -l /dev/davinci* || true
+    npu-smi info || true
+
+    python - <<'PY'
+    import torch
+    import torch_npu
+
+    count = torch.npu.device_count()
+    if count != 4:
+        raise SystemExit(f"Expected exactly four visible NPU devices, found {count}")
+    print(f"Validated {count} visible NPU devices")
+    PY
+
+    exec vllm serve /models/Qwen3.6-35B-A3B-w8a8 \
+      --host 0.0.0.0 \
+      --port 8000 \
+      --served-model-name qwen3.6-35b-a3b \
+      --data-parallel-size 1 \
+      --tensor-parallel-size 4 \
+      --enable-expert-parallel \
+      --quantization ascend \
+      --dtype bfloat16 \
+      --max-model-len 8192 \
+      --max-num-seqs 16 \
+      --max-num-batched-tokens 4096 \
+      --gpu-memory-utilization 0.85 \
+      --trust-remote-code \
+      --no-enable-prefix-caching
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qwen36-35b-a3b-tp4-learning
+  namespace: k12
+  annotations:
+    huawei.com/Ascend910: Ascend910-8,Ascend910-9,Ascend910-10,Ascend910-11
+  labels:
+    app.kubernetes.io/name: qwen36-35b-a3b-tp4-learning
+    app.kubernetes.io/component: inference-learning
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: qwen36-35b-a3b-tp4-learning
+  template:
+    metadata:
+      annotations:
+        huawei.com/Ascend910: Ascend910-8,Ascend910-9,Ascend910-10,Ascend910-11
+      labels:
+        app.kubernetes.io/name: qwen36-35b-a3b-tp4-learning
+        app.kubernetes.io/component: inference-learning
+    spec:
+      restartPolicy: Always
+      nodeSelector:
+        kubernetes.io/arch: arm64
+        kubernetes.io/hostname: a3-server-00
+        node.kubernetes.io/npu.chip.name: Ascend910
+      containers:
+        - name: vllm-ascend
+          image: 110.120.0.3:8889/mineru/vllm-ascend-worker:v0.21.0rc1-a3-20260713-s3
+          imagePullPolicy: Never
+          command: ["/bin/bash", "-lc", "--"]
+          args: ["exec /opt/qwen/start_vllm.sh"]
+          env:
+            - name: ASCEND_VISIBLE_DEVICES
+              value: "8,9,10,11"
+            - name: ASCEND_RT_VISIBLE_DEVICES
+              value: "8,9,10,11"
+          ports:
+            - name: http
+              containerPort: 8000
+          resources:
+            requests:
+              cpu: "64"
+              memory: 256Gi
+              huawei.com/Ascend910: "4"
+            limits:
+              cpu: "64"
+              memory: 256Gi
+              huawei.com/Ascend910: "4"
+          startupProbe:
+            httpGet:
+              path: /health
+              port: http
+            periodSeconds: 10
+            failureThreshold: 360
+            timeoutSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            periodSeconds: 10
+            failureThreshold: 3
+            timeoutSeconds: 15
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: model-weights
+              mountPath: /models/Qwen3.6-35B-A3B-w8a8
+              readOnly: true
+            - name: launcher
+              mountPath: /opt/qwen/start_vllm.sh
+              subPath: start_vllm.sh
+              readOnly: true
+            - name: shared-mem
+              mountPath: /dev/shm
+            - name: ascend-driver
+              mountPath: /usr/local/Ascend/driver
+              readOnly: true
+            - name: ascend-dcmi
+              mountPath: /usr/local/dcmi
+              readOnly: true
+            - name: npu-smi
+              mountPath: /usr/local/bin/npu-smi
+              readOnly: true
+      volumes:
+        - name: model-weights
+          hostPath:
+            path: /home/admin/models/Qwen3.6-35B-A3B-w8a8
+            type: Directory
+        - name: launcher
+          configMap:
+            name: qwen36-35b-a3b-tp4-learning-launcher
+            defaultMode: 0555
+        - name: shared-mem
+          emptyDir:
+            medium: Memory
+            sizeLimit: 64Gi
+        - name: ascend-driver
+          hostPath:
+            path: /usr/local/Ascend/driver
+        - name: ascend-dcmi
+          hostPath:
+            path: /usr/local/dcmi
+        - name: npu-smi
+          hostPath:
+            path: /usr/local/bin/npu-smi
+            type: File
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qwen36-35b-a3b-tp4-learning
+  namespace: k12
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: qwen36-35b-a3b-tp4-learning
+  ports:
+    - name: http
+      port: 8000
+      targetPort: http
